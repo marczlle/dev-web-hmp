@@ -1,0 +1,280 @@
+[
+    {
+        "label": "typing",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "typing",
+        "description": "typing",
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Type",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "TypeVar",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "List",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Any",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Session",
+        "importPath": "sqlalchemy.orm",
+        "description": "sqlalchemy.orm",
+        "isExtraImport": true,
+        "detail": "sqlalchemy.orm",
+        "documentation": {}
+    },
+    {
+        "label": "sessionmaker",
+        "importPath": "sqlalchemy.orm",
+        "description": "sqlalchemy.orm",
+        "isExtraImport": true,
+        "detail": "sqlalchemy.orm",
+        "documentation": {}
+    },
+    {
+        "label": "declarative_base",
+        "importPath": "sqlalchemy.orm",
+        "description": "sqlalchemy.orm",
+        "isExtraImport": true,
+        "detail": "sqlalchemy.orm",
+        "documentation": {}
+    },
+    {
+        "label": "Session",
+        "importPath": "sqlalchemy.orm",
+        "description": "sqlalchemy.orm",
+        "isExtraImport": true,
+        "detail": "sqlalchemy.orm",
+        "documentation": {}
+    },
+    {
+        "label": "DB",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "DB",
+        "description": "DB",
+        "detail": "DB",
+        "documentation": {}
+    },
+    {
+        "label": "get_session",
+        "importPath": "DB",
+        "description": "DB",
+        "isExtraImport": true,
+        "detail": "DB",
+        "documentation": {}
+    },
+    {
+        "label": "Base",
+        "importPath": "DB",
+        "description": "DB",
+        "isExtraImport": true,
+        "detail": "DB",
+        "documentation": {}
+    },
+    {
+        "label": "Engine",
+        "importPath": "DB",
+        "description": "DB",
+        "isExtraImport": true,
+        "detail": "DB",
+        "documentation": {}
+    },
+    {
+        "label": "Base",
+        "importPath": "DB",
+        "description": "DB",
+        "isExtraImport": true,
+        "detail": "DB",
+        "documentation": {}
+    },
+    {
+        "label": "Base",
+        "importPath": "DB",
+        "description": "DB",
+        "isExtraImport": true,
+        "detail": "DB",
+        "documentation": {}
+    },
+    {
+        "label": "create_engine",
+        "importPath": "sqlalchemy",
+        "description": "sqlalchemy",
+        "isExtraImport": true,
+        "detail": "sqlalchemy",
+        "documentation": {}
+    },
+    {
+        "label": "URL",
+        "importPath": "sqlalchemy",
+        "description": "sqlalchemy",
+        "isExtraImport": true,
+        "detail": "sqlalchemy",
+        "documentation": {}
+    },
+    {
+        "label": "Column",
+        "importPath": "sqlalchemy",
+        "description": "sqlalchemy",
+        "isExtraImport": true,
+        "detail": "sqlalchemy",
+        "documentation": {}
+    },
+    {
+        "label": "Integer",
+        "importPath": "sqlalchemy",
+        "description": "sqlalchemy",
+        "isExtraImport": true,
+        "detail": "sqlalchemy",
+        "documentation": {}
+    },
+    {
+        "label": "String",
+        "importPath": "sqlalchemy",
+        "description": "sqlalchemy",
+        "isExtraImport": true,
+        "detail": "sqlalchemy",
+        "documentation": {}
+    },
+    {
+        "label": "contextmanager",
+        "importPath": "contextlib",
+        "description": "contextlib",
+        "isExtraImport": true,
+        "detail": "contextlib",
+        "documentation": {}
+    },
+    {
+        "label": "DAO",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "DAO",
+        "description": "DAO",
+        "detail": "DAO",
+        "documentation": {}
+    },
+    {
+        "label": "Models",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "Models",
+        "description": "Models",
+        "detail": "Models",
+        "documentation": {}
+    },
+    {
+        "label": "DAO",
+        "kind": 6,
+        "importPath": "DAO",
+        "description": "DAO",
+        "peekOfCode": "class DAO:\n    def __init__(self, session_factory=get_session): # Acredite se quiser, isso é um construtor\n        self.session_factory = session_factory\n    def adicionar_entidade(self, entidade: T) -> T:\n        with self.session_factory() as session:\n            session.add(entidade)\n            session.commit()\n            session.refresh(entidade) # Esse refresh pega os dados da entidade q tu acabou de adicionar e atualiza a variavel com eles (por isso que o return consegue retornar o ID do autoincrement)\n            return entidade\n    def obter_por_id(self, tipo_entidade: Type[T], id: int) -> T:",
+        "detail": "DAO",
+        "documentation": {}
+    },
+    {
+        "label": "T",
+        "kind": 5,
+        "importPath": "DAO",
+        "description": "DAO",
+        "peekOfCode": "T = TypeVar('T', bound=Base) # Essa MERDA tá dizendo que Base é um tipo genérico, e isso não pode acontecer, MAS É MENTIRA, Base é do tipo Base, que é uma classe do SQLAlchemy, e não um tipo genérico.\nclass DAO:\n    def __init__(self, session_factory=get_session): # Acredite se quiser, isso é um construtor\n        self.session_factory = session_factory\n    def adicionar_entidade(self, entidade: T) -> T:\n        with self.session_factory() as session:\n            session.add(entidade)\n            session.commit()\n            session.refresh(entidade) # Esse refresh pega os dados da entidade q tu acabou de adicionar e atualiza a variavel com eles (por isso que o return consegue retornar o ID do autoincrement)\n            return entidade",
+        "detail": "DAO",
+        "documentation": {}
+    },
+    {
+        "label": "get_session",
+        "kind": 2,
+        "importPath": "DB",
+        "description": "DB",
+        "peekOfCode": "def get_session() -> typing.Generator[SQLAlchemySession, None, None]:\n    db: SQLAlchemySession = Session()\n    try:\n        yield db\n    except Exception:\n        db.rollback()\n        raise\n    finally:\n        db.close()\nif __name__ == \"__main__\":",
+        "detail": "DB",
+        "documentation": {}
+    },
+    {
+        "label": "Engine",
+        "kind": 5,
+        "importPath": "DB",
+        "description": "DB",
+        "peekOfCode": "Engine = create_engine(\"sqlite:///data.db\",echo=True)\n# echo=True pra mostrar os logs de SQL gerados, útil para debugging.\nBase = declarative_base()\nSession = sessionmaker(bind=Engine, autoflush=False, autocommit=False)\n@contextmanager\ndef get_session() -> typing.Generator[SQLAlchemySession, None, None]:\n    db: SQLAlchemySession = Session()\n    try:\n        yield db\n    except Exception:",
+        "detail": "DB",
+        "documentation": {}
+    },
+    {
+        "label": "Base",
+        "kind": 5,
+        "importPath": "DB",
+        "description": "DB",
+        "peekOfCode": "Base = declarative_base()\nSession = sessionmaker(bind=Engine, autoflush=False, autocommit=False)\n@contextmanager\ndef get_session() -> typing.Generator[SQLAlchemySession, None, None]:\n    db: SQLAlchemySession = Session()\n    try:\n        yield db\n    except Exception:\n        db.rollback()\n        raise",
+        "detail": "DB",
+        "documentation": {}
+    },
+    {
+        "label": "Session",
+        "kind": 5,
+        "importPath": "DB",
+        "description": "DB",
+        "peekOfCode": "Session = sessionmaker(bind=Engine, autoflush=False, autocommit=False)\n@contextmanager\ndef get_session() -> typing.Generator[SQLAlchemySession, None, None]:\n    db: SQLAlchemySession = Session()\n    try:\n        yield db\n    except Exception:\n        db.rollback()\n        raise\n    finally:",
+        "detail": "DB",
+        "documentation": {}
+    },
+    {
+        "label": "criar_tabelas",
+        "kind": 2,
+        "importPath": "ManageDB",
+        "description": "ManageDB",
+        "peekOfCode": "def criar_tabelas():\n    # Se alguma tabela não existir, ela será criada.\n    # Se já existir, não será criada novamente.\n    with Engine.connect() as connection: \n        # Estabelece uma conexão, dessa forma garante que ela seja fechada após o uso.\n        try:\n            Base.metadata.create_all(connection)\n            connection.commit()\n            # Realiza a operação.\n        except Exception as e:",
+        "detail": "ManageDB",
+        "documentation": {}
+    },
+    {
+        "label": "apagar_tabelas",
+        "kind": 2,
+        "importPath": "ManageDB",
+        "description": "ManageDB",
+        "peekOfCode": "def apagar_tabelas():\n    # Apaga todas as tabelas do banco de dados.\n    with Engine.connect() as connection:\n        try:\n            Base.metadata.drop_all(connection)\n            connection.commit()\n            # Realiza a operação.\n        except Exception as e:\n            print(f'❌ Erro ao dropar tabelas: {e}')\n            raise",
+        "detail": "ManageDB",
+        "documentation": {}
+    },
+    {
+        "label": "mostrar_menu",
+        "kind": 2,
+        "importPath": "ManageDB",
+        "description": "ManageDB",
+        "peekOfCode": "def mostrar_menu():\n    # Mostra o menu de opções para o usuário.\n    print('-=-' * 20)\n    print('Choose an option:')\n    print('1 - Create Tables')\n    print('2 - Drop Tables')\n    print('3 - Exit')\n    print('-=-' * 20)\nif __name__ == \"__main__\":\n    # Interface no Terminal para Desenvolvimento.",
+        "detail": "ManageDB",
+        "documentation": {}
+    },
+    {
+        "label": "Usuario",
+        "kind": 6,
+        "importPath": "Models",
+        "description": "Models",
+        "peekOfCode": "class Usuario(Base):\n    __tablename__ = 'usuarios'\n    id = Column(Integer, primary_key=True, autoincrement=True)\n    nome = Column(String(50), nullable=False)",
+        "detail": "Models",
+        "documentation": {}
+    }
+]
