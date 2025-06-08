@@ -293,11 +293,38 @@
         "documentation": {}
     },
     {
+        "label": "AlimentoNutriente",
+        "kind": 6,
+        "importPath": "Models",
+        "description": "Models",
+        "peekOfCode": "class AlimentoNutriente(Base):\n    __tablename__ = 'alimento_nutriente'\n    id_alimento = Column(Integer, ForeignKey('alimento.id_alimento'), primary_key=True)\n    id_nutriente = Column(Integer, ForeignKey('nutriente.id_nutriente'), primary_key=True)\n    quantidade_por_100un = Column(Integer, nullable=False)\n    alimento = relationship(\"Alimento\", back_populates=\"alimento_nutrientes\")\n    nutriente = relationship(\"Nutriente\", back_populates=\"alimento_nutrientes\")\nclass RefeicaoAlimento(Base):\n    __tablename__ = 'refeicao_alimento'\n    id_refeicao = Column(Integer, ForeignKey('refeicao.id_refeicao'), primary_key=True)",
+        "detail": "Models",
+        "documentation": {}
+    },
+    {
+        "label": "RefeicaoAlimento",
+        "kind": 6,
+        "importPath": "Models",
+        "description": "Models",
+        "peekOfCode": "class RefeicaoAlimento(Base):\n    __tablename__ = 'refeicao_alimento'\n    id_refeicao = Column(Integer, ForeignKey('refeicao.id_refeicao'), primary_key=True)\n    id_alimento = Column(Integer, ForeignKey('alimento.id_alimento'), primary_key=True)\n    quantidade = Column(Integer, nullable=False)\n    refeicao = relationship(\"Refeicao\", back_populates=\"refeicao_alimento\")\n    alimento = relationship(\"Alimento\", back_populates=\"refeicao_alimento\")\nclass UsuarioRefeicao(Base):\n    __tablename__ = 'usuario_refeicao'\n    id_usuario = Column(Integer, ForeignKey('usuario.id_usuario'), primary_key=True)",
+        "detail": "Models",
+        "documentation": {}
+    },
+    {
+        "label": "UsuarioRefeicao",
+        "kind": 6,
+        "importPath": "Models",
+        "description": "Models",
+        "peekOfCode": "class UsuarioRefeicao(Base):\n    __tablename__ = 'usuario_refeicao'\n    id_usuario = Column(Integer, ForeignKey('usuario.id_usuario'), primary_key=True)\n    id_refeicao = Column(Integer, ForeignKey('refeicao.id_refeicao'), primary_key=True)\n    usuario = relationship(\"Usuario\", back_populates=\"usuario_refeicao\")\n    refeicao = relationship(\"Refeicao\", back_populates=\"usuario_refeicao\")\nclass Usuario(Base):\n    __tablename__ = 'usuario'\n    id_usuario = Column(Integer, primary_key=True, autoincrement=True)\n    nome = Column(String(50), nullable=False)",
+        "detail": "Models",
+        "documentation": {}
+    },
+    {
         "label": "Usuario",
         "kind": 6,
         "importPath": "Models",
         "description": "Models",
-        "peekOfCode": "class Usuario(Base):\n    __tablename__ = 'usuario'\n    id_usuario = Column(Integer, primary_key=True, autoincrement=True)\n    nome = Column(String(50), nullable=False)\n    email = Column(String(100), nullable=False, unique=True)\n    senha = Column(String(100), nullable=False)\n    genero = Column(String(10), nullable=False)\n    altura = Column(Integer, nullable=False)\n    peso = Column(Integer, nullable=False)\n    refeicao = relationship(",
+        "peekOfCode": "class Usuario(Base):\n    __tablename__ = 'usuario'\n    id_usuario = Column(Integer, primary_key=True, autoincrement=True)\n    nome = Column(String(50), nullable=False)\n    email = Column(String(100), nullable=False, unique=True)\n    senha = Column(String(100), nullable=False)\n    genero = Column(String(10), nullable=False)\n    altura = Column(Integer, nullable=False)\n    peso = Column(Integer, nullable=False)\n    usuario_refeicao = relationship(\"UsuarioRefeicao\", back_populates=\"usuario\")",
         "detail": "Models",
         "documentation": {}
     },
@@ -306,7 +333,7 @@
         "kind": 6,
         "importPath": "Models",
         "description": "Models",
-        "peekOfCode": "class Refeicao(Base):\n    __tablename__ = 'refeicao'\n    id_refeicao = Column(Integer, primary_key=True, autoincrement=True)\n    nome_refeicao = Column(String(100), nullable=False)\n    descricao = Column(Integer, nullable=False)\n    usuario = relationship(\n        \"Usuario\",\n        secondary=usuario_refeicao,\n        back_populates=\"refeicao\"   \n    )",
+        "peekOfCode": "class Refeicao(Base):\n    __tablename__ = 'refeicao'\n    id_refeicao = Column(Integer, primary_key=True, autoincrement=True)\n    nome_refeicao = Column(String(100), nullable=False)\n    descricao = Column(Integer, nullable=False)\n    usuario_refeicao = relationship(\"UsuarioRefeicao\", back_populates=\"refeicao\")\n    refeicao_alimento = relationship(\"RefeicaoAlimento\", back_populates=\"refeicao\")\nclass Alimento(Base):\n    __tablename__ = 'alimento'\n    id_alimento = Column(Integer, primary_key=True, autoincrement=True)",
         "detail": "Models",
         "documentation": {}
     },
@@ -315,7 +342,7 @@
         "kind": 6,
         "importPath": "Models",
         "description": "Models",
-        "peekOfCode": "class Alimento(Base):\n    __tablename__ = 'alimento'\n    id_alimento = Column(Integer, primary_key=True, autoincrement=True)\n    nome_alimento = Column(String(100), nullable=False)\n    unidade_padrao = Column(String(50), nullable=False)\n    calorias = Column(Integer, nullable=False)\nclass Nutriente(Base):\n    __tablename__ = 'nutriente'\n    id_nutriente = Column(Integer, primary_key=True, autoincrement=True)\n    nome_nutriente = Column(String(100), nullable=False)",
+        "peekOfCode": "class Alimento(Base):\n    __tablename__ = 'alimento'\n    id_alimento = Column(Integer, primary_key=True, autoincrement=True)\n    nome_alimento = Column(String(100), nullable=False)\n    unidade_padrao = Column(String(50), nullable=False)\n    calorias = Column(Integer, nullable=False)\n    id_categoria = Column(Integer, ForeignKey('categoria_alimento.id_categoria'), nullable=False)\n    alimento_nutrientes = relationship(\"AlimentoNutriente\", back_populates=\"alimento\")\n    refeicao_alimento = relationship(\"RefeicaoAlimento\", back_populates=\"alimento\")\n    categoria = relationship(\"Categoria_Alimento\", back_populates=\"alimento\")",
         "detail": "Models",
         "documentation": {}
     },
@@ -324,7 +351,7 @@
         "kind": 6,
         "importPath": "Models",
         "description": "Models",
-        "peekOfCode": "class Nutriente(Base):\n    __tablename__ = 'nutriente'\n    id_nutriente = Column(Integer, primary_key=True, autoincrement=True)\n    nome_nutriente = Column(String(100), nullable=False)\n    unidade_medida = Column(String(50), nullable=False)\nclass Registro_Diario(Base):\n    __tablename__ = 'registro_diario'\n    id_registro = Column(Integer, primary_key=True, autoincrement=True)\n    id_usuario = Column(Integer, nullable=False)\n    data = Column(String(10), nullable=False)  # Formato YYYY-MM-DDq",
+        "peekOfCode": "class Nutriente(Base):\n    __tablename__ = 'nutriente'\n    id_nutriente = Column(Integer, primary_key=True, autoincrement=True)\n    nome_nutriente = Column(String(100), nullable=False)\n    unidade_medida = Column(String(50), nullable=False)\n    alimento_nutrientes = relationship(\"AlimentoNutriente\", back_populates=\"nutriente\")\nclass Registro_Diario(Base):\n    __tablename__ = 'registro_diario'\n    id_registro = Column(Integer, primary_key=True, autoincrement=True)\n    id_usuario = Column(Integer, nullable=False)",
         "detail": "Models",
         "documentation": {}
     },
@@ -333,16 +360,16 @@
         "kind": 6,
         "importPath": "Models",
         "description": "Models",
-        "peekOfCode": "class Registro_Diario(Base):\n    __tablename__ = 'registro_diario'\n    id_registro = Column(Integer, primary_key=True, autoincrement=True)\n    id_usuario = Column(Integer, nullable=False)\n    data = Column(String(10), nullable=False)  # Formato YYYY-MM-DDq\n    log = Column(String(500), nullable=False)",
+        "peekOfCode": "class Registro_Diario(Base):\n    __tablename__ = 'registro_diario'\n    id_registro = Column(Integer, primary_key=True, autoincrement=True)\n    id_usuario = Column(Integer, nullable=False)\n    data = Column(String(10), nullable=False)  # Formato YYYY-MM-DDq\n    log = Column(String(500), nullable=False)\nclass Categoria_Alimento(Base):\n    __tablename__ = 'categoria_alimento'\n    nome_categoria = Column(String(100), nullable=False)\n    id_categoria = Column(Integer, primary_key=True, autoincrement=True)",
         "detail": "Models",
         "documentation": {}
     },
     {
-        "label": "usuario_refeicao",
-        "kind": 5,
+        "label": "Categoria_Alimento",
+        "kind": 6,
         "importPath": "Models",
         "description": "Models",
-        "peekOfCode": "usuario_refeicao = Table( # Pra fazer uma refeição customizada, primeiro cria uma refeição, depois bota na tabela associação.\n    'usuario_refeicao', Base.metadata,\n    Column('id_usuario', Integer, ForeignKey('usuario.id_usuario')),\n    Column('id_refeicao', Integer, ForeignKey('refeicao.id_refeicao'))\n)\nclass Usuario(Base):\n    __tablename__ = 'usuario'\n    id_usuario = Column(Integer, primary_key=True, autoincrement=True)\n    nome = Column(String(50), nullable=False)\n    email = Column(String(100), nullable=False, unique=True)",
+        "peekOfCode": "class Categoria_Alimento(Base):\n    __tablename__ = 'categoria_alimento'\n    nome_categoria = Column(String(100), nullable=False)\n    id_categoria = Column(Integer, primary_key=True, autoincrement=True)\n    descricao = Column(String(500), nullable=True)\n    alimento = relationship(\"Alimento\", back_populates=\"categoria\")",
         "detail": "Models",
         "documentation": {}
     }
