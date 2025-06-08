@@ -16,6 +16,43 @@ class DAO:
             session.refresh(entidade) # Esse refresh pega os dados da entidade q tu acabou de adicionar e atualiza a variavel com eles (por isso que o return consegue retornar o ID do autoincrement)
             return entidade
         
+    def adicionar_vinculo(self, classe1, classe2, id1: int, id2: int):
+        with self.session_factory() as session:
+            entidade1 = session.get(classe1, id1)
+            entidade2 = session.get(classe2, id2)
+
+            if entidade1 is None or entidade2 is None:
+                print(f"Uma das entidades com ID {id1} ou {id2} não foi encontrada.")
+                return
+
+            # Tenta adicionar entidade2 a algum relacionamento de entidade1
+            for attr in dir(entidade1):
+                try:
+                    rel = getattr(entidade1, attr)
+                    if isinstance(rel, list) and entidade2.__class__ in [item.class_ for item in rel.__class__.__args__]:
+                        rel.append(entidade2)
+                        break
+                    if isinstance(rel, list) and entidade2 not in rel:
+                        rel.append(entidade2)
+                        break
+                except Exception:
+                    pass
+            else:
+                # Tenta o contrário
+                for attr in dir(entidade2):
+                    try:
+                        rel = getattr(entidade2, attr)
+                        if isinstance(rel, list) and entidade1 not in rel:
+                            rel.append(entidade1)
+                            break
+                    except Exception:
+                        pass
+                else:
+                    print("Nenhum relacionamento encontrado entre as entidades.")
+                    return
+
+            session.commit()
+        
     def obter_por_id(self, tipo_entidade: Type[T], id: int) -> T:
         with self.session_factory() as session:
             entidade_obtida = session.get(tipo_entidade, id)

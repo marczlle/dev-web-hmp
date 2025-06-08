@@ -73,6 +73,14 @@
         "documentation": {}
     },
     {
+        "label": "relationship",
+        "importPath": "sqlalchemy.orm",
+        "description": "sqlalchemy.orm",
+        "isExtraImport": true,
+        "detail": "sqlalchemy.orm",
+        "documentation": {}
+    },
+    {
         "label": "DB",
         "kind": 6,
         "isExtraImport": true,
@@ -162,6 +170,22 @@
         "documentation": {}
     },
     {
+        "label": "ForeignKey",
+        "importPath": "sqlalchemy",
+        "description": "sqlalchemy",
+        "isExtraImport": true,
+        "detail": "sqlalchemy",
+        "documentation": {}
+    },
+    {
+        "label": "Table",
+        "importPath": "sqlalchemy",
+        "description": "sqlalchemy",
+        "isExtraImport": true,
+        "detail": "sqlalchemy",
+        "documentation": {}
+    },
+    {
         "label": "contextmanager",
         "importPath": "contextlib",
         "description": "contextlib",
@@ -192,7 +216,7 @@
         "kind": 6,
         "importPath": "DAO",
         "description": "DAO",
-        "peekOfCode": "class DAO:\n    def __init__(self, session_factory=get_session): # Acredite se quiser, isso é um construtor\n        self.session_factory = session_factory\n    def adicionar_entidade(self, entidade: T) -> T:\n        with self.session_factory() as session:\n            session.add(entidade)\n            session.commit()\n            session.refresh(entidade) # Esse refresh pega os dados da entidade q tu acabou de adicionar e atualiza a variavel com eles (por isso que o return consegue retornar o ID do autoincrement)\n            return entidade\n    def obter_por_id(self, tipo_entidade: Type[T], id: int) -> T:",
+        "peekOfCode": "class DAO:\n    def __init__(self, session_factory=get_session): # Acredite se quiser, isso é um construtor\n        self.session_factory = session_factory\n    def adicionar_entidade(self, entidade: T) -> T:\n        with self.session_factory() as session:\n            session.add(entidade)\n            session.commit()\n            session.refresh(entidade) # Esse refresh pega os dados da entidade q tu acabou de adicionar e atualiza a variavel com eles (por isso que o return consegue retornar o ID do autoincrement)\n            return entidade\n    def adicionar_vinculo(self, classe1, classe2, id1: int, id2: int):",
         "detail": "DAO",
         "documentation": {}
     },
@@ -273,7 +297,52 @@
         "kind": 6,
         "importPath": "Models",
         "description": "Models",
-        "peekOfCode": "class Usuario(Base):\n    __tablename__ = 'usuarios'\n    id = Column(Integer, primary_key=True, autoincrement=True)\n    nome = Column(String(50), nullable=False)",
+        "peekOfCode": "class Usuario(Base):\n    __tablename__ = 'usuario'\n    id_usuario = Column(Integer, primary_key=True, autoincrement=True)\n    nome = Column(String(50), nullable=False)\n    email = Column(String(100), nullable=False, unique=True)\n    senha = Column(String(100), nullable=False)\n    genero = Column(String(10), nullable=False)\n    altura = Column(Integer, nullable=False)\n    peso = Column(Integer, nullable=False)\n    refeicao = relationship(",
+        "detail": "Models",
+        "documentation": {}
+    },
+    {
+        "label": "Refeicao",
+        "kind": 6,
+        "importPath": "Models",
+        "description": "Models",
+        "peekOfCode": "class Refeicao(Base):\n    __tablename__ = 'refeicao'\n    id_refeicao = Column(Integer, primary_key=True, autoincrement=True)\n    nome_refeicao = Column(String(100), nullable=False)\n    descricao = Column(Integer, nullable=False)\n    usuario = relationship(\n        \"Usuario\",\n        secondary=usuario_refeicao,\n        back_populates=\"refeicao\"   \n    )",
+        "detail": "Models",
+        "documentation": {}
+    },
+    {
+        "label": "Alimento",
+        "kind": 6,
+        "importPath": "Models",
+        "description": "Models",
+        "peekOfCode": "class Alimento(Base):\n    __tablename__ = 'alimento'\n    id_alimento = Column(Integer, primary_key=True, autoincrement=True)\n    nome_alimento = Column(String(100), nullable=False)\n    unidade_padrao = Column(String(50), nullable=False)\n    calorias = Column(Integer, nullable=False)\nclass Nutriente(Base):\n    __tablename__ = 'nutriente'\n    id_nutriente = Column(Integer, primary_key=True, autoincrement=True)\n    nome_nutriente = Column(String(100), nullable=False)",
+        "detail": "Models",
+        "documentation": {}
+    },
+    {
+        "label": "Nutriente",
+        "kind": 6,
+        "importPath": "Models",
+        "description": "Models",
+        "peekOfCode": "class Nutriente(Base):\n    __tablename__ = 'nutriente'\n    id_nutriente = Column(Integer, primary_key=True, autoincrement=True)\n    nome_nutriente = Column(String(100), nullable=False)\n    unidade_medida = Column(String(50), nullable=False)\nclass Registro_Diario(Base):\n    __tablename__ = 'registro_diario'\n    id_registro = Column(Integer, primary_key=True, autoincrement=True)\n    id_usuario = Column(Integer, nullable=False)\n    data = Column(String(10), nullable=False)  # Formato YYYY-MM-DDq",
+        "detail": "Models",
+        "documentation": {}
+    },
+    {
+        "label": "Registro_Diario",
+        "kind": 6,
+        "importPath": "Models",
+        "description": "Models",
+        "peekOfCode": "class Registro_Diario(Base):\n    __tablename__ = 'registro_diario'\n    id_registro = Column(Integer, primary_key=True, autoincrement=True)\n    id_usuario = Column(Integer, nullable=False)\n    data = Column(String(10), nullable=False)  # Formato YYYY-MM-DDq\n    log = Column(String(500), nullable=False)",
+        "detail": "Models",
+        "documentation": {}
+    },
+    {
+        "label": "usuario_refeicao",
+        "kind": 5,
+        "importPath": "Models",
+        "description": "Models",
+        "peekOfCode": "usuario_refeicao = Table( # Pra fazer uma refeição customizada, primeiro cria uma refeição, depois bota na tabela associação.\n    'usuario_refeicao', Base.metadata,\n    Column('id_usuario', Integer, ForeignKey('usuario.id_usuario')),\n    Column('id_refeicao', Integer, ForeignKey('refeicao.id_refeicao'))\n)\nclass Usuario(Base):\n    __tablename__ = 'usuario'\n    id_usuario = Column(Integer, primary_key=True, autoincrement=True)\n    nome = Column(String(50), nullable=False)\n    email = Column(String(100), nullable=False, unique=True)",
         "detail": "Models",
         "documentation": {}
     }
