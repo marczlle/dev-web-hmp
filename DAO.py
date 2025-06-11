@@ -44,7 +44,7 @@ class DAO:
                 print(f"{id_nutriente}: {total_nutriente}g")
             print('-=-' * 20)
 
-    def buscar_por_categoria(self, categoria: str) -> List[T]:
+    def buscar_por_categoria(self, categoria: str) -> List[T]: # Procedure 2
         with self.session_factory() as session:
             query = text("SELECT id_alimento,nome_alimento,unidade_padrao,calorias FROM alimento a JOIN categoria_alimento ca ON a.id_categoria = ca.id_categoria WHERE nome_categoria = :categoria")
 
@@ -53,7 +53,7 @@ class DAO:
 
             return rows
         
-    def atualizar_peso_altura(self, id_usuario: int, peso_novo: int, altura_nova: int):
+    def atualizar_peso_altura(self, id_usuario: int, peso_novo: int, altura_nova: int): # Procedure 3
         with self.session_factory() as session: 
 
             query = text("UPDATE usuario SET peso = :peso_novo, altura = :altura_nova WHERE id_usuario = :id_usuario")
@@ -62,7 +62,7 @@ class DAO:
 
             session.commit()
 
-    def adicionar_alimento_em_refeicao(self, id_refeicao: int, id_alimento: int, quantidade: int):
+    def adicionar_alimento_em_refeicao(self, id_refeicao: int, id_alimento: int, quantidade: int): # Procedure 4
         with self.session_factory() as session:
             query = text("INSERT INTO refeicao_alimento (id_refeicao, id_alimento, quantidade) VALUES (:id_refeicao, :id_alimento, :quantidade)")
             session.execute(query, {'id_refeicao': id_refeicao, 'id_alimento': id_alimento, 'quantidade': quantidade})
