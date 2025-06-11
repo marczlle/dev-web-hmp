@@ -7,7 +7,7 @@ from contextlib import contextmanager
 import typing
 
 Engine = create_engine("sqlite:///data.db",echo=True)
-# echo=True pra mostrar os logs de SQL gerados, útil para debugging.
+# echo=True pra mostrar os logs de SQL gerados
 
 Base = declarative_base()
 
@@ -25,7 +25,6 @@ def get_session() -> typing.Generator[SQLAlchemySession, None, None]:
         db.close()
 
 if __name__ == "__main__":
-    # This block is for testing the database connection and session management.
     with get_session() as session:
         print("Db session iniciou com sucesso.")
 print("Db session fechou com sucesso.")

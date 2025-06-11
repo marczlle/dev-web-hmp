@@ -40,7 +40,7 @@ def mostrar_menu():
 
 if __name__ == "__main__":
     # Interface no Terminal para Desenvolvimento.
-    # Não é necessário para o funcionamento do sistema, mas é útil para testes e desenvolvimento.
+    # Só pra facilitar criar e dropar tabelas no banco de dados.
 
     resposta = None
 
@@ -60,6 +60,8 @@ if __name__ == "__main__":
             apagar_tabelas()
             print('-=-' * 20)
             print('✅ Tabelas dropadas com sucesso.')
+        elif resposta == 3:
+            break
         else:
             print(resposta)
             print('❌ Opção Invalida.')

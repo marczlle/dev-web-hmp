@@ -1,57 +1,82 @@
 from typing import Type, TypeVar, List, Any
 from sqlalchemy.orm import Session
 from DB import get_session, Base 
+from sqlalchemy import text
 
-T = TypeVar('T', bound=Base) # Essa MERDA tá dizendo que Base é um tipo genérico, e isso não pode acontecer, MAS É MENTIRA, Base é do tipo Base, que é uma classe do SQLAlchemy, e não um tipo genérico.
+T = TypeVar('T', bound=Base)
 
 class DAO:
 
     def __init__(self, session_factory=get_session): # Acredite se quiser, isso é um construtor
         self.session_factory = session_factory
 
+    # Stored Procedures ----------------------------------------------------------------------------
+
+    def calcular_total_nutrientes(self, id_refeicao: int): # Procedure 1
+        with self.session_factory() as session:
+            query = text("""
+                SELECT 
+                    an.id_nutriente,
+                    SUM((ra.quantidade / 100.0) * an.quantidade_por_100un) AS total_nutriente
+                FROM 
+                    refeicao_alimento ra
+                JOIN 
+                    alimento_nutriente an ON ra.id_alimento = an.id_alimento
+                WHERE 
+                    ra.id_refeicao = :id_refeicao
+                GROUP BY 
+                    an.id_nutriente;
+            """)
+
+            result = session.execute(query, {'id_refeicao': id_refeicao})
+            rows = result.fetchall()
+
+            print('-=-' * 20)
+            for row in rows:
+                id_nutriente = row[0]
+                if id_nutriente == 1:
+                    id_nutriente = "Proteina"
+                elif id_nutriente == 2:
+                    id_nutriente = "Carboidrato"
+                elif id_nutriente == 3:
+                    id_nutriente = "Gordura"
+                total_nutriente = row[1]
+                print(f"{id_nutriente}: {total_nutriente}g")
+            print('-=-' * 20)
+
+    def buscar_por_categoria(self, categoria: str) -> List[T]:
+        with self.session_factory() as session:
+            query = text("SELECT id_alimento,nome_alimento,unidade_padrao,calorias FROM alimento a JOIN categoria_alimento ca ON a.id_categoria = ca.id_categoria WHERE nome_categoria = :categoria")
+
+            result = session.execute(query, {'categoria': categoria})
+            rows = result.fetchall()
+
+            return rows
+        
+    def atualizar_peso_altura(self, id_usuario: int, peso_novo: int, altura_nova: int):
+        with self.session_factory() as session: 
+
+            query = text("UPDATE usuario SET peso = :peso_novo, altura = :altura_nova WHERE id_usuario = :id_usuario")
+
+            session.execute(query, {'peso_novo': peso_novo, 'altura_nova': altura_nova, 'id_usuario': id_usuario})
+
+            session.commit()
+
+    def adicionar_alimento_em_refeicao(self, id_refeicao: int, id_alimento: int, quantidade: int):
+        with self.session_factory() as session:
+            query = text("INSERT INTO refeicao_alimento (id_refeicao, id_alimento, quantidade) VALUES (:id_refeicao, :id_alimento, :quantidade)")
+            session.execute(query, {'id_refeicao': id_refeicao, 'id_alimento': id_alimento, 'quantidade': quantidade})
+
+            session.commit()
+
+    # CRUD Operations -----------------------------------------------------------------------------
+            
     def adicionar_entidade(self, entidade: T) -> T:
         with self.session_factory() as session:
             session.add(entidade)
             session.commit()
             session.refresh(entidade) # Esse refresh pega os dados da entidade q tu acabou de adicionar e atualiza a variavel com eles (por isso que o return consegue retornar o ID do autoincrement)
             return entidade
-        
-    def adicionar_vinculo(self, classe1, classe2, id1: int, id2: int):
-        with self.session_factory() as session:
-            entidade1 = session.get(classe1, id1)
-            entidade2 = session.get(classe2, id2)
-
-            if entidade1 is None or entidade2 is None:
-                print(f"Uma das entidades com ID {id1} ou {id2} não foi encontrada.")
-                return
-
-            # Tenta adicionar entidade2 a algum relacionamento de entidade1
-            for attr in dir(entidade1):
-                try:
-                    rel = getattr(entidade1, attr)
-                    if isinstance(rel, list) and entidade2.__class__ in [item.class_ for item in rel.__class__.__args__]:
-                        rel.append(entidade2)
-                        break
-                    if isinstance(rel, list) and entidade2 not in rel:
-                        rel.append(entidade2)
-                        break
-                except Exception:
-                    pass
-            else:
-                # Tenta o contrário
-                for attr in dir(entidade2):
-                    try:
-                        rel = getattr(entidade2, attr)
-                        if isinstance(rel, list) and entidade1 not in rel:
-                            rel.append(entidade1)
-                            break
-                    except Exception:
-                        pass
-                else:
-                    print("Nenhum relacionamento encontrado entre as entidades.")
-                    return
-
-            session.commit()
         
     def obter_por_id(self, tipo_entidade: Type[T], id: int) -> T:
         with self.session_factory() as session:

@@ -130,6 +130,14 @@
         "documentation": {}
     },
     {
+        "label": "text",
+        "importPath": "sqlalchemy",
+        "description": "sqlalchemy",
+        "isExtraImport": true,
+        "detail": "sqlalchemy",
+        "documentation": {}
+    },
+    {
         "label": "create_engine",
         "importPath": "sqlalchemy",
         "description": "sqlalchemy",
@@ -186,6 +194,22 @@
         "documentation": {}
     },
     {
+        "label": "create_engine",
+        "importPath": "sqlalchemy",
+        "description": "sqlalchemy",
+        "isExtraImport": true,
+        "detail": "sqlalchemy",
+        "documentation": {}
+    },
+    {
+        "label": "text",
+        "importPath": "sqlalchemy",
+        "description": "sqlalchemy",
+        "isExtraImport": true,
+        "detail": "sqlalchemy",
+        "documentation": {}
+    },
+    {
         "label": "contextmanager",
         "importPath": "contextlib",
         "description": "contextlib",
@@ -212,11 +236,20 @@
         "documentation": {}
     },
     {
+        "label": "setup_triggers",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "setup_triggers",
+        "description": "setup_triggers",
+        "detail": "setup_triggers",
+        "documentation": {}
+    },
+    {
         "label": "DAO",
         "kind": 6,
         "importPath": "DAO",
         "description": "DAO",
-        "peekOfCode": "class DAO:\n    def __init__(self, session_factory=get_session): # Acredite se quiser, isso é um construtor\n        self.session_factory = session_factory\n    def adicionar_entidade(self, entidade: T) -> T:\n        with self.session_factory() as session:\n            session.add(entidade)\n            session.commit()\n            session.refresh(entidade) # Esse refresh pega os dados da entidade q tu acabou de adicionar e atualiza a variavel com eles (por isso que o return consegue retornar o ID do autoincrement)\n            return entidade\n    def adicionar_vinculo(self, classe1, classe2, id1: int, id2: int):",
+        "peekOfCode": "class DAO:\n    def __init__(self, session_factory=get_session): # Acredite se quiser, isso é um construtor\n        self.session_factory = session_factory\n    # Stored Procedures ----------------------------------------------------------------------------\n    def calcular_total_nutrientes(self, id_refeicao: int): # Procedure 1\n        with self.session_factory() as session:\n            query = text(\"\"\"\n                SELECT \n                    an.id_nutriente,\n                    SUM((ra.quantidade / 100.0) * an.quantidade_por_100un) AS total_nutriente",
         "detail": "DAO",
         "documentation": {}
     },
@@ -225,7 +258,7 @@
         "kind": 5,
         "importPath": "DAO",
         "description": "DAO",
-        "peekOfCode": "T = TypeVar('T', bound=Base) # Essa MERDA tá dizendo que Base é um tipo genérico, e isso não pode acontecer, MAS É MENTIRA, Base é do tipo Base, que é uma classe do SQLAlchemy, e não um tipo genérico.\nclass DAO:\n    def __init__(self, session_factory=get_session): # Acredite se quiser, isso é um construtor\n        self.session_factory = session_factory\n    def adicionar_entidade(self, entidade: T) -> T:\n        with self.session_factory() as session:\n            session.add(entidade)\n            session.commit()\n            session.refresh(entidade) # Esse refresh pega os dados da entidade q tu acabou de adicionar e atualiza a variavel com eles (por isso que o return consegue retornar o ID do autoincrement)\n            return entidade",
+        "peekOfCode": "T = TypeVar('T', bound=Base)\nclass DAO:\n    def __init__(self, session_factory=get_session): # Acredite se quiser, isso é um construtor\n        self.session_factory = session_factory\n    # Stored Procedures ----------------------------------------------------------------------------\n    def calcular_total_nutrientes(self, id_refeicao: int): # Procedure 1\n        with self.session_factory() as session:\n            query = text(\"\"\"\n                SELECT \n                    an.id_nutriente,",
         "detail": "DAO",
         "documentation": {}
     },
@@ -243,7 +276,7 @@
         "kind": 5,
         "importPath": "DB",
         "description": "DB",
-        "peekOfCode": "Engine = create_engine(\"sqlite:///data.db\",echo=True)\n# echo=True pra mostrar os logs de SQL gerados, útil para debugging.\nBase = declarative_base()\nSession = sessionmaker(bind=Engine, autoflush=False, autocommit=False)\n@contextmanager\ndef get_session() -> typing.Generator[SQLAlchemySession, None, None]:\n    db: SQLAlchemySession = Session()\n    try:\n        yield db\n    except Exception:",
+        "peekOfCode": "Engine = create_engine(\"sqlite:///data.db\",echo=True)\n# echo=True pra mostrar os logs de SQL gerados\nBase = declarative_base()\nSession = sessionmaker(bind=Engine, autoflush=False, autocommit=False)\n@contextmanager\ndef get_session() -> typing.Generator[SQLAlchemySession, None, None]:\n    db: SQLAlchemySession = Session()\n    try:\n        yield db\n    except Exception:",
         "detail": "DB",
         "documentation": {}
     },
@@ -371,6 +404,15 @@
         "description": "Models",
         "peekOfCode": "class Categoria_Alimento(Base):\n    __tablename__ = 'categoria_alimento'\n    nome_categoria = Column(String(100), nullable=False)\n    id_categoria = Column(Integer, primary_key=True, autoincrement=True)\n    descricao = Column(String(500), nullable=True)\n    alimento = relationship(\"Alimento\", back_populates=\"categoria\")",
         "detail": "Models",
+        "documentation": {}
+    },
+    {
+        "label": "instalar_triggers",
+        "kind": 2,
+        "importPath": "setup_triggers",
+        "description": "setup_triggers",
+        "peekOfCode": "def instalar_triggers():\n    engine = create_engine('sqlite:///data.db')\n    triggers = [\n        # Trigger 1\n        \"\"\"\n        CREATE TRIGGER IF NOT EXISTS trg_log_calorias\n        AFTER INSERT ON refeicao_alimento\n        FOR EACH ROW\n        BEGIN\n            INSERT INTO registro_diario(id_usuario, data, log)",
+        "detail": "setup_triggers",
         "documentation": {}
     }
 ]
