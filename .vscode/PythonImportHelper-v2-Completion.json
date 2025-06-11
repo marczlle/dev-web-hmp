@@ -402,7 +402,16 @@
         "kind": 6,
         "importPath": "Models",
         "description": "Models",
-        "peekOfCode": "class Categoria_Alimento(Base):\n    __tablename__ = 'categoria_alimento'\n    nome_categoria = Column(String(100), nullable=False)\n    id_categoria = Column(Integer, primary_key=True, autoincrement=True)\n    descricao = Column(String(500), nullable=True)\n    alimento = relationship(\"Alimento\", back_populates=\"categoria\")",
+        "peekOfCode": "class Categoria_Alimento(Base):\n    __tablename__ = 'categoria_alimento'\n    nome_categoria = Column(String(100), nullable=False)\n    id_categoria = Column(Integer, primary_key=True, autoincrement=True)\n    descricao = Column(String(500), nullable=True)\n    alimento = relationship(\"Alimento\", back_populates=\"categoria\")\nclass Meta_Diaria(Base):\n    __tablename__ = 'meta_diaria'\n    id_usuario = Column(Integer, ForeignKey('usuario.id_usuario'), primary_key=True)\n    id_nutriente = Column(Integer, ForeignKey('nutriente.id_nutriente'), primary_key=True)",
+        "detail": "Models",
+        "documentation": {}
+    },
+    {
+        "label": "Meta_Diaria",
+        "kind": 6,
+        "importPath": "Models",
+        "description": "Models",
+        "peekOfCode": "class Meta_Diaria(Base):\n    __tablename__ = 'meta_diaria'\n    id_usuario = Column(Integer, ForeignKey('usuario.id_usuario'), primary_key=True)\n    id_nutriente = Column(Integer, ForeignKey('nutriente.id_nutriente'), primary_key=True)\n    quantidade = Column(Integer, nullable=False)",
         "detail": "Models",
         "documentation": {}
     },

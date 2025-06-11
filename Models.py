@@ -93,3 +93,10 @@ class Categoria_Alimento(Base):
     descricao = Column(String(500), nullable=True)
 
     alimento = relationship("Alimento", back_populates="categoria")
+
+class Meta_Diaria(Base):
+    __tablename__ = 'meta_diaria'
+
+    id_usuario = Column(Integer, ForeignKey('usuario.id_usuario'), primary_key=True)
+    id_nutriente = Column(Integer, ForeignKey('nutriente.id_nutriente'), primary_key=True)
+    quantidade = Column(Integer, nullable=False)
