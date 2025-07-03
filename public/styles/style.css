@@ -1,0 +1,160 @@
+/* --- Reset Básico e Estilos Globais --- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body, html {
+    height: 100%;
+    font-family: 'Poppins', sans-serif;
+    color: #ffffff;
+    overflow-x: hidden; /* Previne scroll horizontal */
+}
+
+/* --- Fundo com GIF e Overlay --- */
+.background-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -2; /* Atrás de tudo */
+    pointer-events: none;
+    
+    /* --- Link do GIF --- */
+    background-image: url('https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExbTI5NW43M202bGV1Z2VrZ3Fmazg2Zm9iMDAxbjc4d25jZ3N3YjB0ZiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/1Zp0u0KQFMWr9XMUNR/giphy.gif');
+    
+    background-size: cover; /* Faz o GIF cobrir todo o espaço */
+    background-position: center center; /* Centraliza o GIF */
+    background-repeat: no-repeat; /* Evita que o GIF se repita */
+}
+
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Cor preta com 50% de opacidade */
+    z-index: -1; /* Sobre o GIF, mas atrás do conteúdo */
+}
+
+.content-wrapper {
+    position: relative;
+    z-index: 1;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+/* --- Cabeçalho e Navegação --- */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 50px;
+    width: 100%;
+}
+
+.logo {
+    font-size: 1.8em;
+    font-weight: 700;
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    align-items: center;
+    gap: 25px;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: #ffffff;
+    font-weight: 500;
+    font-size: 0.9em;
+    padding: 5px 0;
+    transition: color 0.3s ease;
+}
+
+nav ul li a:hover {
+    color: #b3ffb3; /* Um verde claro no hover */
+}
+
+/* --- Estilos de Botões --- */
+.btn {
+    text-decoration: none;
+    padding: 8px 18px;
+    border-radius: 20px;
+    font-weight: 500;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.btn-signup-nav {
+    border: 2px solid #28a745;
+}
+
+.btn-signup-nav:hover {
+    background-color: #28a745;
+    color: #ffffff;
+}
+
+/* --- Conteúdo Principal --- */
+main {
+    flex-grow: 1; /* Faz o main ocupar o espaço restante */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 20px;
+}
+
+main h1 {
+    font-size: 3.5rem;
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: 25px;
+    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7);
+}
+
+.btn-signup-main {
+    background-color: #28a745; /* Verde sólido */
+    color: #ffffff;
+    border: none;
+    padding: 15px 40px;
+    font-size: 1.2rem;
+    font-weight: 700;
+    border-radius: 30px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.btn-signup-main:hover {
+    background-color: #218838; /* Verde um pouco mais escuro */
+}
+
+/* --- Responsividade para Telas Menores --- */
+@media (max-width: 768px) {
+    header {
+        flex-direction: column;
+        gap: 15px;
+        padding: 20px;
+    }
+
+    nav ul {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 15px;
+    }
+
+    main h1 {
+        font-size: 2.5rem;
+    }
+
+    .btn-signup-main {
+        padding: 12px 30px;
+        font-size: 1rem;
+    }
+}
