@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MHP FIT - Sua jornada fitness começa aqui</title>
+    <link rel="stylesheet" href="../styles/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="background-container"></div>
+
+    <div class="overlay"></div>
+
+    <div class="content-wrapper">
+
+        <header class="">
+            <div class="logo">
+                MHP FIT
+            </div>
+            <nav>
+                <ul>
+                    <li><a onclick="mostrarLogin()" href="#">Login</a></li>
+                    <li><a onclick="mostrarCadastro()" href="#" class="btn btn-signup-nav">Cadastre-se</a></li>
+                </ul>
+            </nav>
+        </header>
+        
+        <main>
+            <div class="hidden" id="cadastro" data-include="../components/cadastro.html"></div>
+
+            <h1 class="main-h1" id="texto_principal">Sua jornada fitness<br>começa aqui.</h1>
+            <button id="botao_cadastro" onclick="mostrarCadastro()" class="btn btn-signup-main"><a>Cadastre-se</a></button>
+        </main>
+
+    </div>
+    
+    <script src="../scripts/include.js"></script>
+    <script>
+        // --- LÓGICA DO CONTROLE DE PASSOS DO FORMULÁRIO ---
+        let stepAtual = 1;
+
+        // --- FUNÇÕES DE VALIDAÇÃO E FORMATAÇÃO ---
+
+        // Função para formatar a data (DD/MM/AAAA)
+        function formatarData(input) {
+            let value = input.value.replace(/\D/g, ''); // Remove tudo que não for dígito
+            if (value.length > 2) {
+                value = value.substring(0, 2) + '/' + value.substring(2);
+            }
+            if (value.length > 5) {
+                value = value.substring(0, 5) + '/' + value.substring(5, 9);
+            }
+            input.value = value;
+        }
+
+        // Função para limpar mensagens de erro
+        function limparErros() {
+            document.querySelectorAll('.error-message').forEach(e => e.classList.remove('visible'));
+            document.querySelectorAll('.form-group input, .form-group select').forEach(e => e.classList.remove('error'));
+        }
+        
+        // Função para validar os campos do Passo 1
+        function validarStep1() {
+            limparErros();
+            let isValid = true;
+            const showError = (inputId, message) => {
+                const inputElement = document.getElementById(inputId);
+                if (inputElement) inputElement.classList.add('error');
+                
+                const errorElement = document.getElementById(`error-${inputId}`);
+                if(errorElement) {
+                    errorElement.textContent = message;
+                    errorElement.classList.add('visible');
+                }
+                isValid = false;
+            };
+            
+            if (document.getElementById('nome').value.trim() === '') showError('nome', 'O nome é obrigatório.');
+            if (document.getElementById('sobrenome').value.trim() === '') showError('sobrenome', 'O sobrenome é obrigatório.');
+            if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(document.getElementById('email').value)) showError('email', 'Por favor, insira um e-mail válido.');
+            if (!/^(?=.*[A-Z])(?=.*\d).{8,}$/.test(document.getElementById('senha').value)) showError('senha', 'A senha não atende aos requisitos.');
+            if (document.getElementById('telefone').value.trim().length < 10) showError('telefone', 'O telefone é obrigatório.');
+            if (document.getElementById('data-nascimento').value.length !== 10) showError('data-nascimento', 'A data de nascimento é obrigatória.');
+            if (document.getElementById('genero').value === '') showError('genero', 'Por favor, selecione um gênero.');
+            if (!document.getElementById('termos').checked) {
+                const errorElement = document.getElementById('error-termos');
+                errorElement.textContent = 'Você deve aceitar os termos e condições.';
+                errorElement.classList.add('visible');
+                isValid = false;
+            }
+            return isValid;
+        }
+
+        // NOVA: Função para validar os campos do Passo 2
+        function validarStep2() {
+            limparErros();
+            let isValid = true;
+
+            const showError = (elementId, message) => {
+                const inputElement = document.getElementById(elementId);
+                if (inputElement) inputElement.classList.add('error');
+                
+                const errorElement = document.getElementById(`error-${elementId}`);
+                if(errorElement) {
+                    errorElement.textContent = message;
+                    errorElement.classList.add('visible');
+                }
+                isValid = false;
+            };
+
+            // Valida a seleção do objetivo
+            if (document.querySelector('input[name="objetivo"]:checked') === null) {
+                const errorElement = document.getElementById('error-objetivo');
+                errorElement.textContent = 'Por favor, selecione um objetivo.';
+                errorElement.classList.add('visible');
+                isValid = false;
+            }
+
+            // Valida a seleção da experiência
+            if (document.querySelector('input[name="experiencia"]:checked') === null) {
+                const errorElement = document.getElementById('error-experiencia');
+                errorElement.textContent = 'Por favor, selecione seu nível de experiência.';
+                errorElement.classList.add('visible');
+                isValid = false;
+            }
+
+            // Valida altura e peso
+            const altura = document.getElementById('altura');
+            if (altura.value <= 0) showError('altura', 'A altura deve ser um valor válido.');
+
+            const peso = document.getElementById('peso');
+            if (peso.value <= 0) showError('peso', 'O peso deve ser um valor válido.');
+
+            return isValid;
+        }
+
+
+        // --- FUNÇÕES DE NAVEGAÇÃO ---
+        function updateStepUI() {
+            document.querySelectorAll('[id^="step"]').forEach(stepDiv => {
+                if (document.getElementById('cadastro').contains(stepDiv)) {
+                    stepDiv.classList.add('hidden');
+                }
+            });
+            const stepToShow = document.getElementById(`step${stepAtual}`);
+            if (stepToShow) {
+                stepToShow.classList.remove('hidden');
+            }
+            const activeStepContainer = stepToShow || document;
+            const allSteppers = activeStepContainer.querySelectorAll('.step');
+            allSteppers.forEach((stepIndicator, index) => {
+                stepIndicator.classList.toggle('active', (index + 1) === stepAtual);
+            });
+        }
+        
+        // ATUALIZADA: Função para avançar, agora com validação do passo 2
+        function avançar() {
+            let canAdvance = false;
+            if (stepAtual === 1) {
+                if (validarStep1()) {
+                    canAdvance = true;
+                }
+            } else if (stepAtual === 2) {
+                if (validarStep2()) {
+                    canAdvance = true;
+                }
+            } else {
+                canAdvance = true;
+            }
+            
+            if (canAdvance && stepAtual < 3) {
+                stepAtual++;
+                updateStepUI();
+            }
+        }
+
+        function voltar() {
+            if (stepAtual > 1) {
+                limparErros(); // Limpa erros ao voltar
+                stepAtual--;
+                updateStepUI();
+            }
+        }
+        
+        // --- LÓGICA DE VISIBILIDADE DO FORMULÁRIO ---
+        function mostrarCadastro() {
+            const texto_principal = document.getElementById('texto_principal');
+            const cadastro = document.getElementById('cadastro');
+            const botao_cadastro = document.getElementById('botao_cadastro');
+            
+            botao_cadastro.classList.toggle('hidden');
+            cadastro.classList.toggle('hidden');
+            texto_principal.classList.toggle('hidden');
+
+            if (!cadastro.classList.contains('hidden')) {
+                stepAtual = 1;
+                setTimeout(updateStepUI, 50); 
+            }
+        }
+
+        function mostrarLogin() {
+            console.log('Função de Login chamada.');
+        }
+    </script>
+</body>
+</html>

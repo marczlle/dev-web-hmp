@@ -1,0 +1,79 @@
+<div class="sign-up-form">
+    <div class="form-header">
+        <h1>Crie sua conta</h1>
+        <p>Preencha os dados abaixo para começar sua transformação</p>
+    </div>
+
+    <div class="stepper">
+        <div class="step active">
+            <div class="step-number">1</div>
+            <div class="step-label">Dados pessoais</div>
+        </div>
+        <div class="line"></div>
+        <div class="step">
+            <div class="step-number">2</div>
+            <div class="step-label">Objetivos</div>
+        </div>
+        <div class="line"></div>
+        <div class="step">
+            <div class="step-number">3</div>
+            <div class="step-label">Confirmação</div>
+        </div>
+    </div>
+
+    <form style="display: flex; flex-direction: column; gap: 1rem; width: 100%;">
+        <div class="form-row">
+            <div class="form-group">
+                <label for="nome">Nome</label>
+                <input type="text" id="nome">
+                <p class="error-message" id="error-nome"></p>
+            </div>
+            <div class="form-group">
+                <label for="sobrenome">Sobrenome</label>
+                <input type="text" id="sobrenome">
+                <p class="error-message" id="error-sobrenome"></p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="email">E-mail</label>
+            <input type="email" id="email">
+            <p class="error-message" id="error-email"></p>
+        </div>
+        <div class="form-group">
+            <label for="senha">Senha</label>
+            <input type="password" id="senha">
+            <p class="password-hint">Mínimo de 8 caracteres, incluindo uma letra maiúscula e um número</p>
+            <p class="error-message" id="error-senha"></p>
+        </div>
+        <div class="form-group">
+            <label for="telefone">Telefone</label>
+            <input type="tel" id="telefone">
+            <p class="error-message" id="error-telefone"></p>
+        </div>
+        <div class="form-row">
+            <div class="form-group">
+                <label for="data-nascimento">Data de nascimento</label>
+                <input type="text" id="data-nascimento" placeholder="DD/MM/AAAA" maxlength="10" oninput="formatarData(this)">
+                <p class="error-message" id="error-data-nascimento"></p>
+            </div>
+            <div class="form-group">
+                <label for="genero">Gênero</label>
+                <select id="genero">
+                    <option value="" disabled selected>Selecione</option>
+                    <option value="feminino">Feminino</option>
+                    <option value="masculino">Masculino</option>
+                    <option value="outro">Outro</option>
+                    <option value="nao-informar">Prefiro não informar</option>
+                </select>
+                <p class="error-message" id="error-genero"></p>
+            </div>
+        </div>
+        <div class="checkbox-group">
+            <input type="checkbox" id="termos" style="width: auto;">
+            <label for="termos">Concordo com os <a href="#">Termos de Serviço</a> e <a href="#">Política de Privacidade</a></label>
+        </div>
+        <p class="error-message" id="error-termos"></p>
+
+        <button onclick="avançar()" type="button" class="submit-btn">Próximo passo</button>
+    </form>
+</div>
