@@ -14,9 +14,7 @@
 
     <div class="overlay"></div>
 
-    <div class="content-wrapper">
-
-        <header class="">
+        <header>
             <div class="logo">
                 MHP FIT
             </div>
@@ -27,9 +25,12 @@
                 </ul>
             </nav>
         </header>
+
+    <div class="content-wrapper">
         
         <main>
             <div class="hidden" id="cadastro" data-include="../components/cadastro.html"></div>
+            <div class="hidden" id="login" data-include="../components/login.html"> </div>
 
             <h1 class="main-h1" id="texto_principal">Sua jornada fitness<br>começa aqui.</h1>
             <button id="botao_cadastro" onclick="mostrarCadastro()" class="btn btn-signup-main"><a>Cadastre-se</a></button>
@@ -137,6 +138,32 @@
             return isValid;
         }
 
+        // NOVA: Função para validar o formulário de login
+        function validarLogin() {
+            limparErros();
+            let isValid = true;
+            const showError = (inputId, message) => {
+                const inputElement = document.getElementById(inputId);
+                if (inputElement) inputElement.classList.add('error');
+
+                const errorElement = document.getElementById(`error-${inputId}`);
+                if (errorElement) {
+                    errorElement.textContent = message;
+                    errorElement.classList.add('visible');
+                }
+                isValid = false;
+            };
+
+            if (document.getElementById('usuario-login').value.trim() === '') {
+                showError('usuario-login', 'O campo usuário é obrigatório.');
+            }
+            if (document.getElementById('senha-login').value.trim() === '') {
+                showError('senha-login', 'O campo senha é obrigatório.');
+            }
+
+            return isValid;
+        }
+
 
         // --- FUNÇÕES DE NAVEGAÇÃO ---
         function updateStepUI() {
@@ -156,7 +183,6 @@
             });
         }
         
-        // ATUALIZADA: Função para avançar, agora com validação do passo 2
         function avançar() {
             let canAdvance = false;
             if (stepAtual === 1) {
@@ -179,7 +205,7 @@
 
         function voltar() {
             if (stepAtual > 1) {
-                limparErros(); // Limpa erros ao voltar
+                limparErros();
                 stepAtual--;
                 updateStepUI();
             }
@@ -190,10 +216,14 @@
             const texto_principal = document.getElementById('texto_principal');
             const cadastro = document.getElementById('cadastro');
             const botao_cadastro = document.getElementById('botao_cadastro');
+            const login = document.getElementById('login');
             
-            botao_cadastro.classList.toggle('hidden');
-            cadastro.classList.toggle('hidden');
-            texto_principal.classList.toggle('hidden');
+            login.classList.add('hidden'); 
+            
+            texto_principal.classList.add('hidden');
+            botao_cadastro.classList.add('hidden');
+            cadastro.classList.remove('hidden');
+
 
             if (!cadastro.classList.contains('hidden')) {
                 stepAtual = 1;
@@ -201,8 +231,16 @@
             }
         }
 
-        function mostrarLogin() {
-            console.log('Função de Login chamada.');
+        function mostrarLogin() { // ISSO AQUI QUE TE INTERESSA MAZELLE
+            const login = document.getElementById('login')
+            const texto_principal = document.getElementById('texto_principal')
+            const botao_cadastro = document.getElementById('botao_cadastro')
+            const cadastro = document.getElementById('cadastro');
+
+            cadastro.classList.add('hidden'); 
+            texto_principal.classList.add('hidden')
+            botao_cadastro.classList.add('hidden')
+            login.classList.remove('hidden')
         }
     </script>
 </body>

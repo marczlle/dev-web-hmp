@@ -4,7 +4,6 @@
     <title>MHP FIT Sign Up</title>
 
     <style>
-        /* Estilos Base (Seu código original) */
         body {
             font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
             color: white;
@@ -325,8 +324,88 @@
         .error-message.visible {
             display: block;
         }
+
+        @media (max-width: 768px) {
+            .sign-up {
+                flex-direction: column; 
+                margin: 1rem;
+                max-width: 100%;
+                transform: scale(0.95) translateX(-1rem) translateY(5rem);
+                margin-top: 2rem;
+                margin-bottom: 2rem;
+            }
+
+            .mhp-info {
+                padding: 1.5rem;
+                gap: 1rem;
+                border-top-right-radius: 12px;
+                border-bottom-left-radius: 0px;
+            }
+
+            .mhp-info h1 {
+                font-size: 1.6rem;
+                line-height: 1.3;
+            }
+
+            .mhp-info p,
+            .icon-text-wrap p {
+                font-size: 0.8rem;
+            }
+
+            .icons {
+                width: 2rem;
+                height: 2rem;
+                padding: 6px;
+            }
+
+            .sign-up-form {
+                padding: 1.5rem;
+                border-top-right-radius: 0px;
+                border-bottom-left-radius: 12px;
+            }
+
+            .form-header h1 {
+                font-size: 1.3rem;
+            }
+
+            .form-group label {
+                font-size: 0.8rem;
+            }
+
+            .form-group input,
+            .form-group select {
+                padding: 0.6rem;
+                font-size: 0.9rem;
+            }
+
+            .submit-btn,
+            .primary-btn,
+            .secondary-btn {
+                font-size: 0.9rem;
+                padding: 0.8rem;
+            }
+
+            .button-group {
+                gap: 0.5rem;
+            }
+
+            .step-label {
+                font-size: 0.7rem;
+            }
+
+            .step-number {
+                width: 26px;
+                height: 26px;
+                font-size: 0.8rem;
+            }
+
+            .login-link p {
+                font-size: 0.75rem;
+            }
+        }
         
     </style>
+
 </head>
 <body>
     <div class="sign-up">

@@ -57,11 +57,14 @@ body, html {
 
 /* --- Cabeçalho e Navegação --- */
 header {
+    position: fixed;
+    top: 0;
+    left: 0;
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 20px 50px;
-    width: 100%;
+    width: 100vw;
     background-color: transparent;
 }
 
@@ -152,7 +155,7 @@ main {
 /* --- Responsividade para Telas Menores --- */
 @media (max-width: 768px) {
     header {
-        flex-direction: column;
+        flex-direction: row;
         gap: 15px;
         padding: 20px;
     }
