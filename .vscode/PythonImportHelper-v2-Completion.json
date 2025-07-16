@@ -1,0 +1,180 @@
+[
+    {
+        "label": "os",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "os",
+        "description": "os",
+        "detail": "os",
+        "documentation": {}
+    },
+    {
+        "label": "FastAPI",
+        "importPath": "fastapi",
+        "description": "fastapi",
+        "isExtraImport": true,
+        "detail": "fastapi",
+        "documentation": {}
+    },
+    {
+        "label": "HTTPException",
+        "importPath": "fastapi",
+        "description": "fastapi",
+        "isExtraImport": true,
+        "detail": "fastapi",
+        "documentation": {}
+    },
+    {
+        "label": "Depends",
+        "importPath": "fastapi",
+        "description": "fastapi",
+        "isExtraImport": true,
+        "detail": "fastapi",
+        "documentation": {}
+    },
+    {
+        "label": "Response",
+        "importPath": "fastapi",
+        "description": "fastapi",
+        "isExtraImport": true,
+        "detail": "fastapi",
+        "documentation": {}
+    },
+    {
+        "label": "Cookie",
+        "importPath": "fastapi",
+        "description": "fastapi",
+        "isExtraImport": true,
+        "detail": "fastapi",
+        "documentation": {}
+    },
+    {
+        "label": "Request",
+        "importPath": "fastapi",
+        "description": "fastapi",
+        "isExtraImport": true,
+        "detail": "fastapi",
+        "documentation": {}
+    },
+    {
+        "label": "BaseModel",
+        "importPath": "pydantic",
+        "description": "pydantic",
+        "isExtraImport": true,
+        "detail": "pydantic",
+        "documentation": {}
+    },
+    {
+        "label": "load_dotenv",
+        "importPath": "dotenv",
+        "description": "dotenv",
+        "isExtraImport": true,
+        "detail": "dotenv",
+        "documentation": {}
+    },
+    {
+        "label": "httpx",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "httpx",
+        "description": "httpx",
+        "detail": "httpx",
+        "documentation": {}
+    },
+    {
+        "label": "StaticFiles",
+        "importPath": "fastapi.staticfiles",
+        "description": "fastapi.staticfiles",
+        "isExtraImport": true,
+        "detail": "fastapi.staticfiles",
+        "documentation": {}
+    },
+    {
+        "label": "FileResponse",
+        "importPath": "fastapi.responses",
+        "description": "fastapi.responses",
+        "isExtraImport": true,
+        "detail": "fastapi.responses",
+        "documentation": {}
+    },
+    {
+        "label": "RedirectResponse",
+        "importPath": "fastapi.responses",
+        "description": "fastapi.responses",
+        "isExtraImport": true,
+        "detail": "fastapi.responses",
+        "documentation": {}
+    },
+    {
+        "label": "logging",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "logging",
+        "description": "logging",
+        "detail": "logging",
+        "documentation": {}
+    },
+    {
+        "label": "root",
+        "kind": 2,
+        "importPath": "backend.main",
+        "description": "backend.main",
+        "peekOfCode": "def root():\n    return FileResponse(os.path.join(pages_dir, \"index.html\"))\n# tenho que terminar isso aqui\n@app.post(\"/login\")\nasync def login(request: Request, response: Response):\n    data = await request.json()\n    password = data.get(\"password\")\n    if password == SENHA:\n        response.set_cookie(key=\"session\", value=\"autorizado\", httponly=True)\n        return {\"success\": True}",
+        "detail": "backend.main",
+        "documentation": {}
+    },
+    {
+        "label": "app",
+        "kind": 5,
+        "importPath": "backend.main",
+        "description": "backend.main",
+        "peekOfCode": "app = FastAPI()\nSENHA = os.getenv(\"SENHA\")\nUSUARIO = os.getenv(\"USUARIO\")\nbase_dir = os.path.dirname(__file__)\npages_dir = os.path.abspath(os.path.join(base_dir, '..', 'pages'))\ncomponents_dir = os.path.abspath(os.path.join(base_dir, '..', 'components'))\n@app.get(\"/\")\ndef root():\n    return FileResponse(os.path.join(pages_dir, \"index.html\"))\n# tenho que terminar isso aqui",
+        "detail": "backend.main",
+        "documentation": {}
+    },
+    {
+        "label": "SENHA",
+        "kind": 5,
+        "importPath": "backend.main",
+        "description": "backend.main",
+        "peekOfCode": "SENHA = os.getenv(\"SENHA\")\nUSUARIO = os.getenv(\"USUARIO\")\nbase_dir = os.path.dirname(__file__)\npages_dir = os.path.abspath(os.path.join(base_dir, '..', 'pages'))\ncomponents_dir = os.path.abspath(os.path.join(base_dir, '..', 'components'))\n@app.get(\"/\")\ndef root():\n    return FileResponse(os.path.join(pages_dir, \"index.html\"))\n# tenho que terminar isso aqui\n@app.post(\"/login\")",
+        "detail": "backend.main",
+        "documentation": {}
+    },
+    {
+        "label": "USUARIO",
+        "kind": 5,
+        "importPath": "backend.main",
+        "description": "backend.main",
+        "peekOfCode": "USUARIO = os.getenv(\"USUARIO\")\nbase_dir = os.path.dirname(__file__)\npages_dir = os.path.abspath(os.path.join(base_dir, '..', 'pages'))\ncomponents_dir = os.path.abspath(os.path.join(base_dir, '..', 'components'))\n@app.get(\"/\")\ndef root():\n    return FileResponse(os.path.join(pages_dir, \"index.html\"))\n# tenho que terminar isso aqui\n@app.post(\"/login\")\nasync def login(request: Request, response: Response):",
+        "detail": "backend.main",
+        "documentation": {}
+    },
+    {
+        "label": "base_dir",
+        "kind": 5,
+        "importPath": "backend.main",
+        "description": "backend.main",
+        "peekOfCode": "base_dir = os.path.dirname(__file__)\npages_dir = os.path.abspath(os.path.join(base_dir, '..', 'pages'))\ncomponents_dir = os.path.abspath(os.path.join(base_dir, '..', 'components'))\n@app.get(\"/\")\ndef root():\n    return FileResponse(os.path.join(pages_dir, \"index.html\"))\n# tenho que terminar isso aqui\n@app.post(\"/login\")\nasync def login(request: Request, response: Response):\n    data = await request.json()",
+        "detail": "backend.main",
+        "documentation": {}
+    },
+    {
+        "label": "pages_dir",
+        "kind": 5,
+        "importPath": "backend.main",
+        "description": "backend.main",
+        "peekOfCode": "pages_dir = os.path.abspath(os.path.join(base_dir, '..', 'pages'))\ncomponents_dir = os.path.abspath(os.path.join(base_dir, '..', 'components'))\n@app.get(\"/\")\ndef root():\n    return FileResponse(os.path.join(pages_dir, \"index.html\"))\n# tenho que terminar isso aqui\n@app.post(\"/login\")\nasync def login(request: Request, response: Response):\n    data = await request.json()\n    password = data.get(\"password\")",
+        "detail": "backend.main",
+        "documentation": {}
+    },
+    {
+        "label": "components_dir",
+        "kind": 5,
+        "importPath": "backend.main",
+        "description": "backend.main",
+        "peekOfCode": "components_dir = os.path.abspath(os.path.join(base_dir, '..', 'components'))\n@app.get(\"/\")\ndef root():\n    return FileResponse(os.path.join(pages_dir, \"index.html\"))\n# tenho que terminar isso aqui\n@app.post(\"/login\")\nasync def login(request: Request, response: Response):\n    data = await request.json()\n    password = data.get(\"password\")\n    if password == SENHA:",
+        "detail": "backend.main",
+        "documentation": {}
+    }
+]

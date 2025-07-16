@@ -33,6 +33,16 @@ body, html {
     background-repeat: no-repeat; /* Evita que o GIF se repita */
 }
 
+.background-image {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: -2; /* Atrás de tudo */
+    pointer-events: none;
+    width: 100%;
+    height: 100%;
+}
+
 .overlay {
     position: fixed;
     top: 0;
@@ -66,15 +76,21 @@ header {
     padding: 20px 50px;
     width: 100vw;
     background-color: transparent;
+    
 }
 
 .main-header {
     background-color: rgb(20, 20, 20);
+    position: relative;
+    z-index: 10;
+    background-color: #202020;
+    padding-bottom: 0.5rem;
 }
 
 .logo {
     font-size: 1.8em;
     font-weight: 700;
+    margin-bottom: 0.2rem;
 }
 
 nav ul {
@@ -160,6 +176,10 @@ main {
         padding: 20px;
     }
 
+    .main-header {
+        padding-bottom: 0.2rem;
+    }
+
     nav ul {
         flex-wrap: wrap;
         justify-content: center;
@@ -174,4 +194,19 @@ main {
         padding: 12px 30px;
         font-size: 1rem;
     }
+
+    .main-footer {
+        background-color: #202020;
+        color: #ffffff;
+        margin-top: 0;
+        padding-top: 0;
+    }
+
+    .footer {
+        background-color: #202020;
+        color: #ffffff;
+        padding: 1.5rem 0;
+        text-align: center;
+    }
+    
 }

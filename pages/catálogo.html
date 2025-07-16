@@ -1,18 +1,239 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Catálogo</title>
-    <!-- CSS/Fonts -->
-    <link rel="stylesheet" href="../styles/style.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap" rel="stylesheet">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Catálogo</title>
+
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Fonts e Estilos -->
+  <link rel="stylesheet" href="../styles/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap" rel="stylesheet">
+
+  <style>
+    /* Estilos opcionais para navegação */
+    .btn-signup-nav {
+      color: rgb(241, 241, 241);
+    }
+
+    .header-a {
+      color: rgb(255, 255, 255);
+    }
+
+    /* Ajustes de caption */
+    .carousel-caption {
+      background-color: rgba(0, 0, 0, 0.5);
+      padding: 1rem;
+      border-radius: 0.5rem;
+    }
+
+    .content {
+        display: flex;
+        flex-direction: column;
+    }
+
+    h2 {
+        color: black;
+    }
+    
+    /* Fonte opcional */
+    body {
+      font-family: 'Poppins', sans-serif;
+      margin: 0;
+    }
+
+    #carouselExampleCaptions {
+        width: 100%;
+        overflow: hidden;
+    }
+
+    #carouselExampleCaptions .carousel-inner,
+    #carouselExampleCaptions .carousel-item {
+        height: 70vh; /* OU 100vh, se quiser tela inteira */
+    }
+
+    #carouselExampleCaptions .carousel-item img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    .planos {
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+        margin-top: 2rem;
+    }
+
+    .plano {
+        display: flex;
+        align-items: center;
+        border-radius: 12px;
+        background-color: #f8f9fa;
+        padding: 1rem 1.5rem;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+        transition: transform 0.2s ease;
+    }
+
+    .plano:hover {
+        transform: translateY(-4px);
+    }
+
+    .plano img {
+        width: 150px;
+        height: auto;
+        border-radius: 8px;
+        object-fit: cover;
+    }
+
+    .content-plano {
+        background-color: rgb(27, 223, 86)  ;
+    }
+
+    .plano-txt {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .plano-txt p {
+        color: black;
+    }
+
+    .button {
+        width: 8rem;
+    }
+
+    @media (max-width: 768px) {
+        .plano {
+            flex-direction: column;
+            text-align: center;
+        }
+
+        .plano img {
+            width: 100%;
+            height: auto;
+            max-height: 300px;
+            object-fit: cover;
+            margin-bottom: 0.5rem
+        }
+
+        .plano-txt {
+            align-items: center;
+        }
+        }
+
+        .plano img.me-4 {
+            margin-right: 1rem;
+        }
+        
+        .py-4 {
+            padding-top: 0 !important;
+            margin-top: 0 !important;
+        }
+
+        .footer.py-4 {
+            padding-top: 1rem !important;
+        }
+
+  </style>
 </head>
 <body>
-    <div class='main-header' data-include="../components/header.html"></div>
 
-    <script src="../scripts/include.js"></script>
+  <!-- Header com include -->
+  <div class="main-header" data-include="../components/header.html"></div>
+
+  <!-- Carousel Fullscreen com Captions -->
+   <div class="content">
+        <div id="carouselExampleCaptions" class="carousel slide carousel-fade" data-bs-ride="carousel"
+            style="z-index: 0; top: 0; left: 0; width: 100%; overflow: hidden;">
+            <div class="carousel-inner"">
+            <div class="carousel-item active"">
+                <img src="https://www.naturemade.com/cdn/shop/articles/healthy-foods-to-eat.jpg?v=1611988563" class="d-block w-100"
+                    style="object-fit: cover;" alt="Slide 1">
+                <div class="carousel-caption d-none d-md-block">
+                    <h5>Controle seu bem estar com HMP</h5>
+                    <p>Através da ciencia e de nutricionistas profissionais, fornecemos a melhor ajuda na sua jornada!</p>
+                </div>
+            </div>
+            <div class="carousel-item"">
+                <img src="https://www.3dleisure.com/wp-content/uploads/2024/09/superfoods.jpg" class="d-block w-100"
+                    style="object-fit: cover;" alt="Slide 2">
+                <div class="carousel-caption d-none d-md-block">
+                    <h5>Segundo Slide</h5>
+                    <p>Texto pra encher linguiça</p>
+                </div>
+            </div>
+            <div class="carousel-item"">
+                <img src="https://www.makkhahealthandspa.com/wp-content/uploads/2024/11/A-woman-eating-healthy-food-before-a-massage.jpg" class="d-block w-100"
+                    style="object-fit: cover;" alt="Slide 3">
+                <div class="carousel-caption d-none d-md-block">
+                    <h5>Terceiro Slide</h5>
+                    <p>Texto pra encher linguiça</p>
+                </div>
+            </div>
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Anterior</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Próximo</span>
+            </button>
+        </div>
+
+        <div class="main-card-carousel" data-include="../components/carousel-cards.html"></div>
+
+        <div class="content-plano">
+            <div class="planos container my-5">
+                <h1 style="place-self: center;">Nossos Planos Nutricionais</h1>
+                <div class="plano align-items-center mb-4">
+                    <img src="https://tophealthdoctors.com.au/wp-content/uploads/2023/05/weight-loss-3.png" class="me-4"/>
+                    <div class="plano-txt">
+                        <h2>Perda de peso</h2>
+                        <p>Um plano focado em reduzir gordura corporal de forma saudável, com orientação nutricional e sugestões de atividades físicas ideais para o seu corpo.</p>
+                        <button class="button">Iniciar</button>
+                    </div>
+                </div>
+                <div class="plano align-items-center mb-4">
+                    <img src="https://www.becomeio.com/wp-content/uploads/2022/07/man-measuring-his-biceps.jpeg" class="me-4"/>
+                    <div class="plano-txt">
+                        <h2>Ganho de massa muscular</h2>
+                        <p>Voltado para quem busca definição e crescimento muscular, combinando alimentação rica em proteínas com treinos intensos e eficientes.</p>
+                        <button class="button">Iniciar</button>
+                    </div>                
+                </div>
+                <div class="plano align-items-center mb-4">
+                    <img src="https://i0.wp.com/www.magnuspersonal.com.br/wp-content/uploads/2021/09/3-dicas-para-melhorar-seu-condicionamento-fisico-Magnus.jpg?resize=1024%2C683&ssl=1" class="me-4"/>
+                    <div class="plano-txt">
+                        <h2>Melhora do condicionamento físico</h2>
+                        <p>Fortaleça seu coração, pulmões e resistência geral com um plano dinâmico e adaptável, ideal para melhorar seu desempenho físico no dia a dia.</p>
+                        <button class="button">Iniciar</button>
+                    </div>
+                </div>
+                <div class="plano align-items-center mb-4">
+                    <img src="https://drconsulta.com/conteudo/wp-content/uploads/2023/08/dr.consulta-quando-procurar-um-clinico-geral-1024x576.webp" class="me-4"/>
+                    <div class="plano-txt">
+                        <h2>Saúde geral</h2>
+                        <p>Perfeito para quem deseja manter o equilíbrio físico e mental, com foco em hábitos saudáveis, bem-estar emocional e prevenção de doenças.</p>
+                        <button class="button">Iniciar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div style="background-color: #202020; margin-top: 0; padding-top: 0;" class="main-footer" data-include="../components/footer.html"></div>
+
+  <!-- Script de include (header etc.) -->
+  <script src="../scripts/include.js"></script>
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
 </body>
 </html>
