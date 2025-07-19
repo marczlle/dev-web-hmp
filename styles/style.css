@@ -85,6 +85,7 @@ header {
     z-index: 10;
     background-color: #202020;
     padding-bottom: 0.5rem;
+    justify-content: space-between;
 }
 
 .logo {
@@ -166,6 +167,20 @@ main {
 
 .btn-signup-main:hover {
     background-color: #218838; /* Verde um pouco mais escuro */
+}
+
+.main-footer {
+    background-color: #202020;
+    color: #ffffff;
+    margin-top: 0;
+    padding-top: 0;
+}
+
+.footer {
+    background-color: #202020;
+    color: #ffffff;
+    padding: 1.5rem 0;
+    text-align: center;
 }
 
 /* --- Responsividade para Telas Menores --- */
