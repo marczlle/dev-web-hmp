@@ -1,15 +1,18 @@
-/* --- Reset Básico e Estilos Globais --- */
+/* --- ESTILOS GLOBAIS E RESET --- */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
-body, html {
+html {
     font-family: 'Poppins', sans-serif;
-    background-color: #ffffff;
-    color: #333333;
-    overflow-x: hidden;
+    overflow-x: hidden; /* Previne scroll horizontal em todas as páginas */
+}
+
+body {
+    background-color: #ffffff; /* Fundo branco por padrão */
+    color: #333333; /* Texto escuro por padrão */
 }
 
 a {
@@ -26,55 +29,54 @@ a:hover {
     display: none;
 }
 
-/* --- Cabeçalho e Rodapé (Adaptado conforme solicitado) --- */
+/* --- COMPONENTES COMPARTILHADOS (HEADER, FOOTER, BOTÕES) --- */
+
+/* Estilo padrão do Header e Footer para todas as páginas */
 .main-header, .main-footer {
     width: 100%;
     background-color: #202020;
-    color: #ecf0f1; /* Cor de texto clara do novo arquivo */
+    color: #ffffff;
     display: flex;
+    justify-content: space-between;
     align-items: center;
-    position: relative;
+    /* Padding vertical removido, mantendo o horizontal */
+    padding: 15px 50px; 
+    position: relative; /* Posição padrão */
     z-index: 10;
-}
-
-.main-header {
-    justify-content: space-between; /* Mantém o logo à esquerda e nav à direita */
-}
-
-.main-footer {
-    justify-content: center; /* Centraliza o conteúdo do rodapé */
-}
-
-.main-header a, .main-footer a {
-    color: #ffffff; /* Garante que os links sejam brancos */
-    text-decoration: none;
-    margin: 0 10px;
 }
 
 .logo {
     font-size: 1.8em;
     font-weight: 700;
-    color: #ffffff;
-    margin: 0; /* Reseta margem para evitar conflito */
 }
 
 nav ul {
     list-style: none;
     display: flex;
     align-items: center;
-    gap: 15px; /* Ajustado para funcionar com as novas margens dos links */
+    gap: 25px;
 }
 
 nav ul li a {
     color: #ffffff;
     font-weight: 500;
+    font-size: 1em;
+    padding: 5px 0;
+    transition: color 0.3s ease;
 }
 
 nav ul li a:hover {
     color: #b3ffb3;
 }
 
-/* --- Botões (Mantidos do Original) --- */
+.main-footer {
+    justify-content: center;
+    /* Padding vertical removido */
+    padding: 1.5rem 0; 
+    text-align: center;
+}
+
+/* O resto dos botões continua igual... */
 .btn {
     text-decoration: none;
     padding: 8px 18px;
@@ -86,27 +88,114 @@ nav ul li a:hover {
 
 .btn-signup-nav {
     border: 2px solid #28a745;
-    color: #ffffff;
 }
 
 .btn-signup-nav:hover {
     background-color: #28a745;
+    color: #ffffff;
 }
 
-/* --- Layout Principal para o Artigo --- */
+/* --- ESTILOS EXCLUSIVOS DA HOME PAGE --- */
+/* (O resto do CSS da home page continua o mesmo) */
+
+/* Header fixo e transparente apenas na home */
+.home-page .main-header {
+    position: fixed;
+    background-color: transparent;
+    /* Garante que o padding na home também seja ajustado */
+    padding: 15px 50px;
+}
+
+.home-page {
+    color: #ffffff; /* Texto branco na home */
+}
+
+/* Fundo com GIF e Overlay */
+.home-page .background-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: -2;
+    width: 100%;
+    height: 100%;
+    background-image: url('../public/assets/giphy_food.gif');
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+}
+
+.home-page .overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: -1;
+}
+
+/* Header fixo e transparente apenas na home */
+.home-page .main-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%; /* Garante que ocupe a largura toda */
+    background-color: transparent;
+    padding: 15px 50px;
+}
+
+/* Estrutura de conteúdo centralizada na home */
+.home-page .content-wrapper {
+    position: relative;
+    z-index: 1;
+    height: 100vh; /* Usa a altura da viewport para garantir o preenchimento total */
+    display: flex;
+    flex-direction: column;
+}
+
+.home-page main {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 20px;
+}
+
+.home-page .main-h1 {
+    font-size: 3.5rem;
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: 25px;
+    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7);
+    text-align: center;
+}
+
+.home-page .btn-signup-main {
+    background-color: #28a745;
+    color: #ffffff;
+    border: none;
+    padding: 15px 40px;
+    font-size: 1.2rem;
+    font-weight: 700;
+    border-radius: 30px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.home-page .btn-signup-main:hover {
+    background-color: #218838;
+}
+
+
+/* --- ESTILOS PARA PÁGINAS DE ARTIGO/NOTÍCIA --- */
 main.container {
     max-width: 800px;
-    margin: 0 auto;
+    margin: 2rem auto; /* Adiciona margem para separar do header/footer */
     padding: 0 20px;
 }
 
-/* Classes de utilidade */
-.py-5 {
-    padding-top: 3rem;
-    padding-bottom: 3rem;
-}
-
-/* --- Estilos do Conteúdo do Artigo --- */
 article h1 {
     font-size: 2.8rem;
     font-weight: 700;
@@ -145,7 +234,8 @@ article figcaption {
     margin-top: 0.75rem;
 }
 
-/* --- Responsividade --- */
+
+/* --- RESPONSIVIDADE --- */
 @media (max-width: 768px) {
     .main-header {
         flex-direction: column;
@@ -159,6 +249,17 @@ article figcaption {
         gap: 15px;
     }
 
+    /* Home page */
+    .home-page .main-h1 {
+        font-size: 2.5rem;
+    }
+
+    .home-page .btn-signup-main {
+        padding: 12px 30px;
+        font-size: 1rem;
+    }
+
+    /* Article page */
     article h1 {
         font-size: 2.2rem;
     }
