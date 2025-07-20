@@ -1,198 +1,156 @@
+/* --- Reset Básico e Estilos Globais --- */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
+body, html {
+    font-family: 'Poppins', sans-serif;
+    background-color: #ffffff;
+    color: #333333;
+    overflow-x: hidden;
+}
+
 a {
     text-decoration: none;
+    color: #28a745;
+    transition: color 0.3s ease;
 }
 
-body, html {
-    height: 100%;
-    font-family: 'Poppins', sans-serif;
-    color: #ffffff;
-    overflow-x: hidden; /* Previne scroll horizontal */
-}
-
-/* --- Fundo com GIF e Overlay --- */
-.background-container {
-    position: fixed;
-    top: 0;
-    left: 0;
-    z-index: -2; /* Atrás de tudo */
-    pointer-events: none;
-    width: 100%;
-    height: 100%;
-    
-    /* --- Link do GIF --- */
-    background-image: url('../public/assets/giphy_food.gif');
-    
-    background-size: cover; /* Faz o GIF cobrir todo o espaço */
-    background-position: center center; /* Centraliza o GIF */
-    background-repeat: no-repeat; /* Evita que o GIF se repita */
-}
-
-.background-image {
-    position: fixed;
-    top: 0;
-    left: 0;
-    z-index: -2; /* Atrás de tudo */
-    pointer-events: none;
-    width: 100%;
-    height: 100%;
-}
-
-.overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5); /* Cor preta com 50% de opacidade */
-    z-index: -1; /* Sobre o GIF, mas atrás do conteúdo */
-}
-
-.content-wrapper {
-    position: relative;
-    z-index: 1;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
+a:hover {
+    color: #218838;
 }
 
 .hidden {
-    display:none
+    display: none;
 }
 
-/* --- Cabeçalho e Navegação --- */
-header {
-    position: fixed;
-    top: 0;
-    left: 0;
+/* --- Cabeçalho e Rodapé (Adaptado conforme solicitado) --- */
+.main-header, .main-footer {
+    width: 100%;
+    background-color: #202020;
+    color: #ecf0f1; /* Cor de texto clara do novo arquivo */
     display: flex;
-    justify-content: space-between;
     align-items: center;
-    padding: 20px 50px;
-    width: 100vw;
-    background-color: transparent;
-    
+    position: relative;
+    z-index: 10;
 }
 
 .main-header {
-    background-color: rgb(20, 20, 20);
-    position: relative;
-    z-index: 10;
-    background-color: #202020;
-    padding-bottom: 0.5rem;
-    justify-content: space-between;
+    justify-content: space-between; /* Mantém o logo à esquerda e nav à direita */
+}
+
+.main-footer {
+    justify-content: center; /* Centraliza o conteúdo do rodapé */
+}
+
+.main-header a, .main-footer a {
+    color: #ffffff; /* Garante que os links sejam brancos */
+    text-decoration: none;
+    margin: 0 10px;
 }
 
 .logo {
     font-size: 1.8em;
     font-weight: 700;
-    margin-bottom: 0.2rem;
+    color: #ffffff;
+    margin: 0; /* Reseta margem para evitar conflito */
 }
 
 nav ul {
     list-style: none;
     display: flex;
     align-items: center;
-    gap: 25px;
+    gap: 15px; /* Ajustado para funcionar com as novas margens dos links */
 }
 
 nav ul li a {
-    text-decoration: none;
     color: #ffffff;
     font-weight: 500;
-    font-size: 1em;
-    padding: 5px 0;
-    transition: color 0.3s ease;
 }
 
 nav ul li a:hover {
-    color: #b3ffb3; /* Um verde claro no hover */
+    color: #b3ffb3;
 }
 
-/* --- Estilos de Botões --- */
+/* --- Botões (Mantidos do Original) --- */
 .btn {
     text-decoration: none;
     padding: 8px 18px;
     border-radius: 20px;
     font-weight: 500;
     transition: background-color 0.3s ease, color 0.3s ease;
-    color:#ffffff;
+    color: #ffffff;
 }
 
 .btn-signup-nav {
     border: 2px solid #28a745;
+    color: #ffffff;
 }
 
 .btn-signup-nav:hover {
     background-color: #28a745;
-    color: #ffffff;
 }
 
-/* --- Conteúdo Principal --- */
-main {
-    flex-grow: 1; /* Faz o main ocupar o espaço restante */
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    padding: 20px;
+/* --- Layout Principal para o Artigo --- */
+main.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0 20px;
 }
 
-.main-h1 {
-    font-size: 3.5rem;
+/* Classes de utilidade */
+.py-5 {
+    padding-top: 3rem;
+    padding-bottom: 3rem;
+}
+
+/* --- Estilos do Conteúdo do Artigo --- */
+article h1 {
+    font-size: 2.8rem;
     font-weight: 700;
     line-height: 1.2;
-    margin-bottom: 25px;
-    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7);
+    margin-bottom: 1rem;
+    color: #111111;
+}
+
+article .text-muted {
+    color: #6c757d;
+    font-size: 0.9rem;
+    margin-bottom: 2rem;
+    display: block;
+}
+
+article p {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    margin-bottom: 1.5rem;
+}
+
+article figure {
+    margin: 2.5rem 0;
+}
+
+article .img-fluid {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+}
+
+article figcaption {
+    font-size: 0.9rem;
+    color: #6c757d;
     text-align: center;
+    margin-top: 0.75rem;
 }
 
-.btn-signup-main {
-    background-color: #28a745; /* Verde sólido */
-    color: #ffffff;
-    border: none;
-    padding: 15px 40px;
-    font-size: 1.2rem;
-    font-weight: 700;
-    border-radius: 30px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-
-.btn-signup-main:hover {
-    background-color: #218838; /* Verde um pouco mais escuro */
-}
-
-.main-footer {
-    background-color: #202020;
-    color: #ffffff;
-    margin-top: 0;
-    padding-top: 0;
-}
-
-.footer {
-    background-color: #202020;
-    color: #ffffff;
-    padding: 1.5rem 0;
-    text-align: center;
-}
-
-/* --- Responsividade para Telas Menores --- */
+/* --- Responsividade --- */
 @media (max-width: 768px) {
-    header {
-        flex-direction: row;
+    .main-header {
+        flex-direction: column;
         gap: 15px;
         padding: 20px;
-    }
-
-    .main-header {
-        padding-bottom: 0.2rem;
     }
 
     nav ul {
@@ -201,27 +159,11 @@ main {
         gap: 15px;
     }
 
-    main h1 {
-        font-size: 2.5rem;
+    article h1 {
+        font-size: 2.2rem;
     }
 
-    .btn-signup-main {
-        padding: 12px 30px;
+    article p {
         font-size: 1rem;
     }
-
-    .main-footer {
-        background-color: #202020;
-        color: #ffffff;
-        margin-top: 0;
-        padding-top: 0;
-    }
-
-    .footer {
-        background-color: #202020;
-        color: #ffffff;
-        padding: 1.5rem 0;
-        text-align: center;
-    }
-    
 }
