@@ -1,8 +1,8 @@
+console.log("login.js carregado!");
 
 async function realizarLogin(event) {
     event.preventDefault();
 
-    // Pega os valores dos campos de login
     const usuario = document.getElementById('usuario').value.trim();
     const password = document.getElementById('password').value.trim();
 
@@ -12,60 +12,32 @@ async function realizarLogin(event) {
     }
 
     try {
-        console.log('Enviando dados de login...');
-
+        console.log({ usuario, password });
         const response = await fetch('/login', {
             method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-                usuario: usuario,
-                password: password
-            })
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ usuario, password }),
+            credentials: 'same-origin' // ESSENCIAL para o cookie funcionar!
         });
 
         const data = await response.json();
 
         if (response.ok && data.success) {
-            console.log('Login bem-sucedido');
-            alert('Login realizado com sucesso!');
-
-            // Redireciona para o catálogo
-            window.location.href = '/catalogo';
+            window.location.href = data.redirect;
         } else {
-            console.error('Erro no login:', data.detail);
-            alert(`Erro: ${data.detail}`);
+            alert(data.detail || data.message || 'Usuário ou senha incorretos');
         }
-
     } catch (error) {
-        console.error('Erro na requisição:', error);
-        alert('Erro de conexão. Tente novamente.');
+        alert('Erro ao tentar fazer login. Tente novamente.');
+        console.error(error);
     }
 }
 
-// Função para verificar se está logado (opcional)
-async function verificarAutenticacao() {
-    try {
-        const response = await fetch('/verify-auth');
-        const data = await response.json();
-
-        if (!data.authenticated && window.location.pathname === '/catalogo') {
-            window.location.href = '/';
-        }
-
-        return data.authenticated;
-    } catch (error) {
-        console.error('Erro ao verificar autenticação:', error);
-        return false;
-    }
-}
-
-// Função para logout
 async function realizarLogout() {
     try {
         const response = await fetch('/logout', {
-            method: 'POST'
+            method: 'POST',
+            credentials: 'same-origin'
         });
 
         if (response.ok) {
@@ -77,22 +49,14 @@ async function realizarLogout() {
     }
 }
 
-// Adiciona event listener quando a página carregar
 document.addEventListener('DOMContentLoaded', function () {
-    // Para o formulário de login
     const loginForm = document.getElementById('loginForm');
     if (loginForm) {
         loginForm.addEventListener('submit', realizarLogin);
     }
 
-    // Para botão de logout (se existir)
     const logoutBtn = document.getElementById('logoutBtn');
     if (logoutBtn) {
         logoutBtn.addEventListener('click', realizarLogout);
-    }
-
-    // Verifica autenticação em páginas protegidas
-    if (window.location.pathname === '/catalogo') {
-        verificarAutenticacao();
     }
 });

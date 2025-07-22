@@ -8,6 +8,11 @@ document.addEventListener("DOMContentLoaded", async () => {
       const html = await res.text();
       el.innerHTML = html;
       el.removeAttribute('data-include'); // Remove o atributo pra evitar loops infinitos
+
+      // Ativa o listener se o include for do login
+      if (file.includes('login.html')) {
+        ativarLoginListener();
+      }
     }
 
     // Se ainda existirem novos includes (aninhados), chama de novo
@@ -18,3 +23,11 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   await processIncludes();
 });
+
+function ativarLoginListener() {
+  const loginForm = document.getElementById('loginForm');
+  if (loginForm && !loginForm.dataset.listener) {
+    loginForm.addEventListener('submit', realizarLogin);
+    loginForm.dataset.listener = "true"; // evita adicionar múltiplas vezes
+  }
+}

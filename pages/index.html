@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,37 +11,39 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap" rel="stylesheet">
     <link rel="icon" type="image/png" href="/assets/salad.png">
     <link rel="icon" type="image/png" href="../public/assets/salad.png">
-    
+
 </head>
+
 <body class="home-page">
     <div class="background-container"></div>
 
     <div class="overlay"></div>
 
-        <header class="main-header">
-            <div class="logo"> 
-                MHP FIT
-            </div>
-            <nav>
-                <ul>
-                    <li><a onclick="mostrarLogin()" href="#">Login</a></li>
-                    <li><a onclick="mostrarCadastro()" href="#" class="btn btn-signup-nav">Cadastre-se</a></li>
-                </ul>
-            </nav>
-        </header>
+    <header class="main-header">
+        <div class="logo">
+            MHP FIT
+        </div>
+        <nav>
+            <ul>
+                <li><a onclick="mostrarLogin()" href="#">Login</a></li>
+                <li><a onclick="mostrarCadastro()" href="#" class="btn btn-signup-nav">Cadastre-se</a></li>
+            </ul>
+        </nav>
+    </header>
 
     <div class="content-wrapper">
-        
+
         <main>
             <div class="hidden" id="cadastro" data-include="../components/cadastro.html"></div>
             <div class="hidden" id="login" data-include="../components/login.html"> </div>
 
             <h1 class="main-h1" id="texto_principal">Sua jornada fitness<br>começa aqui.</h1>
-            <button id="botao_cadastro" onclick="mostrarCadastro()" class="btn btn-signup-main"><a style="color: white;">Cadastre-se</a></button>
+            <button id="botao_cadastro" onclick="mostrarCadastro()" class="btn btn-signup-main"><a
+                    style="color: white;">Cadastre-se</a></button>
         </main>
 
     </div>
-    
+
     <script src="../scripts/include.js"></script>
     <script>
         // --- LÓGICA DO CONTROLE DE PASSOS DO FORMULÁRIO ---
@@ -65,7 +68,7 @@
             document.querySelectorAll('.error-message').forEach(e => e.classList.remove('visible'));
             document.querySelectorAll('.form-group input, .form-group select').forEach(e => e.classList.remove('error'));
         }
-        
+
         // Função para validar os campos do Passo 1
         function validarStep1() {
             limparErros();
@@ -73,19 +76,19 @@
             const showError = (inputId, message) => {
                 const inputElement = document.getElementById(inputId);
                 if (inputElement) inputElement.classList.add('error');
-                
-                const errorElement = document.getElementById(`error-${inputId}`);
-                if(errorElement) {
+
+                const errorElement = document.getElementById(`error - ${ inputId }`);
+                if (errorElement) {
                     errorElement.textContent = message;
                     errorElement.classList.add('visible');
                 }
                 isValid = false;
             };
-            
+
             if (document.getElementById('nome').value.trim() === '') showError('nome', 'O nome é obrigatório.');
             if (document.getElementById('sobrenome').value.trim() === '') showError('sobrenome', 'O sobrenome é obrigatório.');
             if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(document.getElementById('email').value)) showError('email', 'Por favor, insira um e-mail válido.');
-            if (!/^(?=.*[A-Z])(?=.*\d).{8,}$/.test(document.getElementById('senha').value)) showError('senha', 'A senha não atende aos requisitos.');
+            if (!/^(?=.[A-Z])(?=.\d).{8,}$/.test(document.getElementById('senha').value)) showError('senha', 'A senha não atende aos requisitos.');
             if (document.getElementById('telefone').value.trim().length < 10) showError('telefone', 'O telefone é obrigatório.');
             if (document.getElementById('data-nascimento').value.length !== 10) showError('data-nascimento', 'A data de nascimento é obrigatória.');
             if (document.getElementById('genero').value === '') showError('genero', 'Por favor, selecione um gênero.');
@@ -106,9 +109,9 @@
             const showError = (elementId, message) => {
                 const inputElement = document.getElementById(elementId);
                 if (inputElement) inputElement.classList.add('error');
-                
-                const errorElement = document.getElementById(`error-${elementId}`);
-                if(errorElement) {
+
+                const errorElement = document.getElementById(`error - ${ elementId }`);
+                if (errorElement) {
                     errorElement.textContent = message;
                     errorElement.classList.add('visible');
                 }
@@ -149,7 +152,7 @@
                 const inputElement = document.getElementById(inputId);
                 if (inputElement) inputElement.classList.add('error');
 
-                const errorElement = document.getElementById(`error-${inputId}`);
+                const errorElement = document.getElementById(`error - ${ inputId }`);
                 if (errorElement) {
                     errorElement.textContent = message;
                     errorElement.classList.add('visible');
@@ -175,7 +178,7 @@
                     stepDiv.classList.add('hidden');
                 }
             });
-            const stepToShow = document.getElementById(`step${stepAtual}`);
+            const stepToShow = document.getElementById(`step${ stepAtual }`);
             if (stepToShow) {
                 stepToShow.classList.remove('hidden');
             }
@@ -185,7 +188,7 @@
                 stepIndicator.classList.toggle('active', (index + 1) === stepAtual);
             });
         }
-        
+
         function avançar() {
             let canAdvance = false;
             if (stepAtual === 1) {
@@ -199,7 +202,7 @@
             } else {
                 canAdvance = true;
             }
-            
+
             if (canAdvance && stepAtual < 3) {
                 stepAtual++;
                 updateStepUI();
@@ -213,16 +216,16 @@
                 updateStepUI();
             }
         }
-        
+
         // --- LÓGICA DE VISIBILIDADE DO FORMULÁRIO ---
         function mostrarCadastro() {
             const texto_principal = document.getElementById('texto_principal');
             const cadastro = document.getElementById('cadastro');
             const botao_cadastro = document.getElementById('botao_cadastro');
             const login = document.getElementById('login');
-            
-            login.classList.add('hidden'); 
-            
+
+            login.classList.add('hidden');
+
             texto_principal.classList.add('hidden');
             botao_cadastro.classList.add('hidden');
             cadastro.classList.remove('hidden');
@@ -230,7 +233,7 @@
 
             if (!cadastro.classList.contains('hidden')) {
                 stepAtual = 1;
-                setTimeout(updateStepUI, 50); 
+                setTimeout(updateStepUI, 50);
             }
         }
 
@@ -240,11 +243,13 @@
             const botao_cadastro = document.getElementById('botao_cadastro')
             const cadastro = document.getElementById('cadastro');
 
-            cadastro.classList.add('hidden'); 
+            cadastro.classList.add('hidden');
             texto_principal.classList.add('hidden')
             botao_cadastro.classList.add('hidden')
             login.classList.remove('hidden')
         }
     </script>
+    <script src="/scripts/login.js"></script>
 </body>
+
 </html>

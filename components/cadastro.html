@@ -14,33 +14,39 @@
             margin: 0;
             background-color: #f8f9fa;
         }
+
         h1 {
             word-wrap: break-word;
             font-size: 1.5rem;
             text-align: left;
             margin: 0;
         }
+
         p {
             text-align: left;
             margin: 0;
             font-size: 0.9rem;
             color: #e2e8f0;
         }
+
         .sign-up-form p {
             color: #6b7280;
         }
+
         .mhp-info h1 {
             font-size: 2.5rem;
             font-weight: bold;
         }
+
         .sign-up {
             display: flex;
             width: 100%;
             max-width: 950px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
             border-radius: 12px;
             margin: 2rem;
         }
+
         .mhp-info {
             display: flex;
             flex-direction: column;
@@ -49,15 +55,18 @@
             gap: 1.5rem;
             flex: 1.2;
             min-width: 0;
-            background-color: #16a34a; /* Cor verde ajustada */
+            background-color: #16a34a;
+            /* Cor verde ajustada */
             border-top-left-radius: 12px;
             border-bottom-left-radius: 12px;
         }
+
         .sign-up-form {
             display: flex;
             flex-direction: column;
             padding: 2.5rem;
-            gap: 1.5rem; /* Aumentado para mais espaço */
+            gap: 1.5rem;
+            /* Aumentado para mais espaço */
             color: black;
             flex: 2;
             min-width: 0;
@@ -65,6 +74,7 @@
             border-top-right-radius: 12px;
             border-bottom-right-radius: 12px;
         }
+
         .icons {
             background-color: rgba(255, 255, 255, 0.2);
             border-radius: 50%;
@@ -76,27 +86,33 @@
             padding: 8px;
             flex-shrink: 0;
         }
+
         .icon-text-list {
             display: flex;
             flex-direction: column;
             gap: 1.2rem;
             width: 100%;
         }
+
         .icon-text-wrap {
             display: flex;
             flex-direction: row;
             align-items: center;
             gap: 1rem;
         }
+
         .icon-text-wrap p {
-             font-size: 1rem;
-             color: #ffffff;
+            font-size: 1rem;
+            color: #ffffff;
         }
+
         .logo {
             font-weight: bold;
             font-size: 1.5rem;
         }
-        .login-link p, .login-link span {
+
+        .login-link p,
+        .login-link span {
             color: #ffffff;
             font-size: 0.9rem;
         }
@@ -108,7 +124,7 @@
             font-size: 1.8rem;
             font-weight: bold;
         }
-        
+
         /* Stepper */
         .stepper {
             display: flex;
@@ -116,6 +132,7 @@
             justify-content: space-between;
             width: 100%;
         }
+
         .step {
             display: flex;
             flex-direction: column;
@@ -124,6 +141,7 @@
             position: relative;
             flex-grow: 1;
         }
+
         .step-number {
             width: 32px;
             height: 32px;
@@ -136,55 +154,68 @@
             font-weight: bold;
             z-index: 1;
         }
+
         .step-label {
             margin-top: 0.5rem;
             font-size: 0.8rem;
             font-weight: 500;
             color: #9ca3af;
         }
+
         .step.active .step-number {
             background-color: #16a34a;
             color: white;
         }
+
         .step.active .step-label {
             color: #16a34a;
             font-weight: bold;
         }
+
         .stepper .line {
             height: 2px;
             background-color: #e5e7eb;
             flex-grow: 1;
-            margin: 0 -20px 24px -20px; /* Alinha a linha com os circulos */
+            margin: 0 -20px 24px -20px;
+            /* Alinha a linha com os circulos */
         }
-        
+
         /* Grupos de Formulário */
         .form-row {
             display: flex;
             gap: 1.5rem;
             width: 100%;
         }
+
         .form-group {
             display: flex;
             flex-direction: column;
             gap: 0.5rem;
             flex-grow: 1;
         }
+
         .form-group label {
             font-size: 0.9rem;
             font-weight: 500;
             color: #374151;
         }
-        .form-group input, .form-group select {
+
+        .form-group input,
+        .form-group select {
             padding: 0.8rem;
             border: 1px solid #d1d5db;
             border-radius: 6px;
             font-size: 1rem;
             width: 100%;
-            box-sizing: border-box; /* Garante que padding não afete a largura */
+            box-sizing: border-box;
+            /* Garante que padding não afete a largura */
         }
-         .form-group input::placeholder, .form-group select {
+
+        .form-group input::placeholder,
+        .form-group select {
             color: #9ca3af;
         }
+
         .password-hint {
             font-size: 0.8rem;
             color: #6b7280;
@@ -196,15 +227,18 @@
             align-items: center;
             gap: 0.5rem;
         }
+
         .checkbox-group label {
             font-size: 0.9rem;
             color: #374151;
         }
-         .checkbox-group a {
+
+        .checkbox-group a {
             color: #16a34a;
             text-decoration: none;
             font-weight: 500;
         }
+
         .checkbox-group a:hover {
             text-decoration: underline;
         }
@@ -223,9 +257,11 @@
             margin-top: 0.5rem;
             transition: background-color 0.2s;
         }
+
         .submit-btn:hover {
             background-color: #15803d;
         }
+
         .form-question {
             font-size: 1rem;
             font-weight: bold;
@@ -259,7 +295,8 @@
         .radio-option input[type="radio"] {
             width: 1rem;
             height: 1rem;
-            accent-color: #16a34a; /* Cor do radio button quando selecionado */
+            accent-color: #16a34a;
+            /* Cor do radio button quando selecionado */
         }
 
         .radio-option label {
@@ -272,7 +309,8 @@
         .button-group {
             display: flex;
             gap: 1rem;
-            margin-top: 1.5rem; /* Espaço acima dos botões */
+            margin-top: 1.5rem;
+            /* Espaço acima dos botões */
         }
 
         /* Estilo base para os botões de ação */
@@ -307,9 +345,12 @@
             background-color: #d1d5db;
         }
 
-        .form-group input.error, .form-group select.error {
-            border-color: #ef4444; /* Vermelho */
-            background-color: #fee2e2; /* Fundo vermelho bem claro */
+        .form-group input.error,
+        .form-group select.error {
+            border-color: #ef4444;
+            /* Vermelho */
+            background-color: #fee2e2;
+            /* Fundo vermelho bem claro */
         }
 
         /* Estilo para a mensagem de erro */
@@ -317,7 +358,8 @@
             color: #ef4444;
             font-size: 0.8rem;
             margin-top: 4px;
-            display: none; /* Escondido por padrão */
+            display: none;
+            /* Escondido por padrão */
         }
 
         /* Classe para tornar a mensagem de erro visível */
@@ -327,7 +369,7 @@
 
         @media (max-width: 768px) {
             .sign-up {
-                flex-direction: column; 
+                flex-direction: column;
                 margin: 1rem;
                 max-width: 100%;
                 transform: scale(0.95) translateX(-1rem) translateY(5rem);
@@ -403,51 +445,61 @@
                 font-size: 0.75rem;
             }
         }
-        
     </style>
 
 </head>
+
 <body>
     <div class="sign-up">
         <div class="mhp-info">
             <div>
                 <div class="logo">MHP FIT</div>
                 <h1>Comece sua<br>jornada fitness<br>hoje!</h1>
-                <p>Junte-se a milhares de pessoas que já<br>transformaram seus corpos e suas<br>vidas com nossos programas<br>personalizados.</p>
+                <p>Junte-se a milhares de pessoas que já<br>transformaram seus corpos e suas<br>vidas com nossos
+                    programas<br>personalizados.</p>
                 <div class="icon-text-list" style="margin-top: 2rem;">
                     <div class="icon-text-wrap">
-                        <svg class='icons' xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"></path>
+                        <svg class='icons' xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                            stroke="currentColor" stroke-width="1.5">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2">
+                            </path>
                         </svg>
                         <p>Planos de treino personalizados</p>
                     </div>
                     <div class="icon-text-wrap">
-                        <svg class="icons" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                        <svg class="icons" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                            stroke="currentColor" stroke-width="1.5">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                         </svg>
                         <p>Acompanhamento nutricional</p>
                     </div>
                     <div class="icon-text-wrap">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="icons" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icons" fill="none" viewBox="0 0 24 24"
+                            stroke="currentColor" stroke-width="1.5">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z">
+                            </path>
                         </svg>
                         <p>Comunidade de apoio</p>
                     </div>
                 </div>
             </div>
             <div class="login-link">
-                <p>Já tem uma conta? <span onclick=mostrarLogin() style="text-decoration: underline; font-weight: bold; cursor: pointer;">Entrar</span></p>
+                <p>Já tem uma conta? <span onclick=mostrarLogin()
+                        style="text-decoration: underline; font-weight: bold; cursor: pointer;">Entrar</span></p>
             </div>
         </div>
-        
+
         <div class="sign-up-form">
             <div id="step1" class='' data-include="../components/step1.html"></div>
             <div id="step2" class='hidden' data-include="../components/step2.html"></div>
             <div id="step3" class='hidden' data-include="../components/step3.html"></div>
         </div>
-        
+
     </div>
 
-
+    <script src="/scripts/login.js"></script>
 
 </body>
