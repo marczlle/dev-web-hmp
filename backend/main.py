@@ -123,7 +123,31 @@ def verify_auth(request: Request):
     except HTTPException:
         return {"authenticated": False}
 
-# Middleware para debugging (opcional - remova em produção)
+@app.get("/calculadora")
+def calculadora(request: Request, autenticado: bool = Depends(verificar_autenticacao)):
+    calculadora_path = os.path.join(pages_dir, "calculadora.html")
+    if os.path.exists(calculadora_path):
+        return FileResponse(calculadora_path)
+    raise HTTPException(status_code=404, detail="Página da calculadora não encontrada")
+
+# Rota protegida para receitas
+@app.get("/receitas")
+def receitas(request: Request, autenticado: bool = Depends(verificar_autenticacao)):
+    receitas_path = os.path.join(pages_dir, "receitas.html")
+    if os.path.exists(receitas_path):
+        return FileResponse(receitas_path)
+    raise HTTPException(status_code=404, detail="Página de receitas não encontrada")
+
+# Rotas protegidas para cada produto
+for i in range(1, 7):
+    @app.get(f"/produto{i}")
+    def produto(request: Request, i=i, autenticado: bool = Depends(verificar_autenticacao)):
+        produto_path = os.path.join(pages_dir, f"produto{i}.html")
+        if os.path.exists(produto_path):
+            return FileResponse(produto_path)
+        raise HTTPException(status_code=404, detail=f"Produto {i} não encontrado")
+
+# Middleware para debugging 
 @app.middleware("http")
 async def debug_middleware(request: Request, call_next):
     print(f"Request: {request.method} {request.url}")
