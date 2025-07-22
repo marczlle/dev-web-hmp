@@ -1,5 +1,5 @@
 from DB import Base
-from sqlalchemy import Column, Integer, String, ForeignKey, Table
+from sqlalchemy import Column, Integer, String, ForeignKey, Table, Numeric, Float
 from sqlalchemy.orm import relationship
 
 class AlimentoNutriente(Base):
@@ -7,7 +7,7 @@ class AlimentoNutriente(Base):
 
     id_alimento = Column(Integer, ForeignKey('alimento.id_alimento'), primary_key=True)
     id_nutriente = Column(Integer, ForeignKey('nutriente.id_nutriente'), primary_key=True)
-    quantidade_por_100un = Column(Integer, nullable=False)
+    quantidade_por_100un = Column(Numeric(10, 2), nullable=False)
 
     alimento = relationship("Alimento", back_populates="alimento_nutrientes")
     nutriente = relationship("Nutriente", back_populates="alimento_nutrientes")

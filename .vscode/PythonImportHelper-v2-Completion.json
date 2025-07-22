@@ -322,6 +322,22 @@
         "documentation": {}
     },
     {
+        "label": "Numeric",
+        "importPath": "sqlalchemy",
+        "description": "sqlalchemy",
+        "isExtraImport": true,
+        "detail": "sqlalchemy",
+        "documentation": {}
+    },
+    {
+        "label": "Float",
+        "importPath": "sqlalchemy",
+        "description": "sqlalchemy",
+        "isExtraImport": true,
+        "detail": "sqlalchemy",
+        "documentation": {}
+    },
+    {
         "label": "create_engine",
         "importPath": "sqlalchemy",
         "description": "sqlalchemy",
@@ -494,7 +510,7 @@
         "kind": 5,
         "importPath": "Main",
         "description": "Main",
-        "peekOfCode": "engine = create_engine('sqlite:///data.db')\nBase.metadata.create_all(engine)\nSession = sessionmaker(bind=engine)\nsession = Session()\n# Categoria genérica\ncategoria = Categoria_Alimento(nome_categoria=\"Comida\", descricao=\"Alimentos diversos\")\nsession.add(categoria)\nsession.commit()\n# Nutrientes\nnutrientes = {",
+        "peekOfCode": "engine = create_engine('sqlite:///data.db')\nBase.metadata.create_all(engine)\nSession = sessionmaker(bind=engine)\nsession = Session()\n# Categoria genérica\n# Adicionando uma verificação para não duplicar\nif not session.query(Categoria_Alimento).first():\n    categoria = Categoria_Alimento(nome_categoria=\"Comida\", descricao=\"Alimentos diversos\")\n    session.add(categoria)\n    session.commit()",
         "detail": "Main",
         "documentation": {}
     },
@@ -503,7 +519,7 @@
         "kind": 5,
         "importPath": "Main",
         "description": "Main",
-        "peekOfCode": "Session = sessionmaker(bind=engine)\nsession = Session()\n# Categoria genérica\ncategoria = Categoria_Alimento(nome_categoria=\"Comida\", descricao=\"Alimentos diversos\")\nsession.add(categoria)\nsession.commit()\n# Nutrientes\nnutrientes = {\n    \"Gordura\": Nutriente(nome_nutriente=\"Gordura\", unidade_medida=\"g\"),\n    \"Fibra\": Nutriente(nome_nutriente=\"Fibra\", unidade_medida=\"g\"),",
+        "peekOfCode": "Session = sessionmaker(bind=engine)\nsession = Session()\n# Categoria genérica\n# Adicionando uma verificação para não duplicar\nif not session.query(Categoria_Alimento).first():\n    categoria = Categoria_Alimento(nome_categoria=\"Comida\", descricao=\"Alimentos diversos\")\n    session.add(categoria)\n    session.commit()\ncategoria = session.query(Categoria_Alimento).first()\n# Nutrientes",
         "detail": "Main",
         "documentation": {}
     },
@@ -512,7 +528,7 @@
         "kind": 5,
         "importPath": "Main",
         "description": "Main",
-        "peekOfCode": "session = Session()\n# Categoria genérica\ncategoria = Categoria_Alimento(nome_categoria=\"Comida\", descricao=\"Alimentos diversos\")\nsession.add(categoria)\nsession.commit()\n# Nutrientes\nnutrientes = {\n    \"Gordura\": Nutriente(nome_nutriente=\"Gordura\", unidade_medida=\"g\"),\n    \"Fibra\": Nutriente(nome_nutriente=\"Fibra\", unidade_medida=\"g\"),\n    \"Proteína\": Nutriente(nome_nutriente=\"Proteína\", unidade_medida=\"g\"),",
+        "peekOfCode": "session = Session()\n# Categoria genérica\n# Adicionando uma verificação para não duplicar\nif not session.query(Categoria_Alimento).first():\n    categoria = Categoria_Alimento(nome_categoria=\"Comida\", descricao=\"Alimentos diversos\")\n    session.add(categoria)\n    session.commit()\ncategoria = session.query(Categoria_Alimento).first()\n# Nutrientes\n# Adicionando uma verificação para não duplicar",
         "detail": "Main",
         "documentation": {}
     },
@@ -521,7 +537,7 @@
         "kind": 5,
         "importPath": "Main",
         "description": "Main",
-        "peekOfCode": "categoria = Categoria_Alimento(nome_categoria=\"Comida\", descricao=\"Alimentos diversos\")\nsession.add(categoria)\nsession.commit()\n# Nutrientes\nnutrientes = {\n    \"Gordura\": Nutriente(nome_nutriente=\"Gordura\", unidade_medida=\"g\"),\n    \"Fibra\": Nutriente(nome_nutriente=\"Fibra\", unidade_medida=\"g\"),\n    \"Proteína\": Nutriente(nome_nutriente=\"Proteína\", unidade_medida=\"g\"),\n    \"Carboidrato\": Nutriente(nome_nutriente=\"Carboidrato\", unidade_medida=\"g\"),\n}",
+        "peekOfCode": "categoria = session.query(Categoria_Alimento).first()\n# Nutrientes\n# Adicionando uma verificação para não duplicar\nif not session.query(Nutriente).first():\n    nutrientes_data = {\n        \"Gordura\": Nutriente(nome_nutriente=\"Gordura\", unidade_medida=\"g\"),\n        \"Fibra\": Nutriente(nome_nutriente=\"Fibra\", unidade_medida=\"g\"),\n        \"Proteína\": Nutriente(nome_nutriente=\"Proteína\", unidade_medida=\"g\"),\n        \"Carboidrato\": Nutriente(nome_nutriente=\"Carboidrato\", unidade_medida=\"g\"),\n    }",
         "detail": "Main",
         "documentation": {}
     },
@@ -530,7 +546,7 @@
         "kind": 5,
         "importPath": "Main",
         "description": "Main",
-        "peekOfCode": "nutrientes = {\n    \"Gordura\": Nutriente(nome_nutriente=\"Gordura\", unidade_medida=\"g\"),\n    \"Fibra\": Nutriente(nome_nutriente=\"Fibra\", unidade_medida=\"g\"),\n    \"Proteína\": Nutriente(nome_nutriente=\"Proteína\", unidade_medida=\"g\"),\n    \"Carboidrato\": Nutriente(nome_nutriente=\"Carboidrato\", unidade_medida=\"g\"),\n}\nsession.add_all(nutrientes.values())\nsession.commit()\n# Alimentos com unidades realistas e nutrientes por porção\nalimentos_data = [",
+        "peekOfCode": "nutrientes = {n.nome_nutriente: n for n in session.query(Nutriente).all()}\n# Alimentos\nalimentos_data = [\n    (\"Frango Grelhado\", 165, \"100g\", {\"Proteína\": 31.0, \"Gordura\": 3.6, \"Carboidrato\": 0.0, \"Fibra\": 0.0}),\n    (\"Arroz Integral\", 124, \"1 xícara (100g)\", {\"Proteína\": 2.6, \"Gordura\": 1.0, \"Carboidrato\": 25.8, \"Fibra\": 1.6}),\n    (\"Feijão Preto Cozido\", 132, \"1 concha (130g)\", {\"Proteína\": 8.9, \"Gordura\": 0.8, \"Carboidrato\": 23.7, \"Fibra\": 8.7}),\n    (\"Maçã\", 52, \"1 un (130g)\", {\"Proteína\": 0.3, \"Gordura\": 0.2, \"Carboidrato\": 13.8, \"Fibra\": 2.4}),\n    (\"Ovo Cozido\", 78, \"1 un (50g)\", {\"Proteína\": 6.3, \"Gordura\": 5.3, \"Carboidrato\": 0.6, \"Fibra\": 0.0}),\n    (\"Pão Integral\", 69, \"1 fatia (30g)\", {\"Proteína\": 3.6, \"Gordura\": 1.1, \"Carboidrato\": 11.6, \"Fibra\": 1.9}),\n    (\"Iogurte Natural Integral\", 61, \"1 copo (100ml)\", {\"Proteína\": 3.5, \"Gordura\": 3.3, \"Carboidrato\": 4.7, \"Fibra\": 0.0}),",
         "detail": "Main",
         "documentation": {}
     },
@@ -539,7 +555,7 @@
         "kind": 5,
         "importPath": "Main",
         "description": "Main",
-        "peekOfCode": "alimentos_data = [\n    (\"Frango Grelhado\", 165, \"100g\", {\"Proteína\": 31, \"Gordura\": 3.6, \"Carboidrato\": 0, \"Fibra\": 0}),\n    (\"Arroz Integral\", 111, \"1 xícara\", {\"Proteína\": 2.6, \"Gordura\": 0.9, \"Carboidrato\": 23, \"Fibra\": 1.8}),\n    (\"Feijão Preto\", 132, \"1 concha\", {\"Proteína\": 8.9, \"Gordura\": 0.5, \"Carboidrato\": 23.7, \"Fibra\": 8.7}),\n    (\"Maçã\", 52, \"1 un\", {\"Proteína\": 0.3, \"Gordura\": 0.2, \"Carboidrato\": 14, \"Fibra\": 2.4}),\n    (\"Ovo Cozido\", 78, \"1 un\", {\"Proteína\": 6.3, \"Gordura\": 5.3, \"Carboidrato\": 0.6, \"Fibra\": 0}),\n    (\"Pão Integral\", 69, \"1 fatia\", {\"Proteína\": 3.6, \"Gordura\": 1.1, \"Carboidrato\": 11.6, \"Fibra\": 1.9}),\n    (\"Iogurte Natural\", 61, \"1 copo (100ml)\", {\"Proteína\": 3.5, \"Gordura\": 3.3, \"Carboidrato\": 4.7, \"Fibra\": 0}),\n    (\"Salmão\", 208, \"100g\", {\"Proteína\": 20, \"Gordura\": 13, \"Carboidrato\": 0, \"Fibra\": 0}),\n    (\"Banana\", 89, \"1 un\", {\"Proteína\": 1.1, \"Gordura\": 0.3, \"Carboidrato\": 23, \"Fibra\": 2.6}),",
+        "peekOfCode": "alimentos_data = [\n    (\"Frango Grelhado\", 165, \"100g\", {\"Proteína\": 31.0, \"Gordura\": 3.6, \"Carboidrato\": 0.0, \"Fibra\": 0.0}),\n    (\"Arroz Integral\", 124, \"1 xícara (100g)\", {\"Proteína\": 2.6, \"Gordura\": 1.0, \"Carboidrato\": 25.8, \"Fibra\": 1.6}),\n    (\"Feijão Preto Cozido\", 132, \"1 concha (130g)\", {\"Proteína\": 8.9, \"Gordura\": 0.8, \"Carboidrato\": 23.7, \"Fibra\": 8.7}),\n    (\"Maçã\", 52, \"1 un (130g)\", {\"Proteína\": 0.3, \"Gordura\": 0.2, \"Carboidrato\": 13.8, \"Fibra\": 2.4}),\n    (\"Ovo Cozido\", 78, \"1 un (50g)\", {\"Proteína\": 6.3, \"Gordura\": 5.3, \"Carboidrato\": 0.6, \"Fibra\": 0.0}),\n    (\"Pão Integral\", 69, \"1 fatia (30g)\", {\"Proteína\": 3.6, \"Gordura\": 1.1, \"Carboidrato\": 11.6, \"Fibra\": 1.9}),\n    (\"Iogurte Natural Integral\", 61, \"1 copo (100ml)\", {\"Proteína\": 3.5, \"Gordura\": 3.3, \"Carboidrato\": 4.7, \"Fibra\": 0.0}),\n    (\"Salmão Grelhado\", 208, \"100g\", {\"Proteína\": 20.0, \"Gordura\": 13.0, \"Carboidrato\": 0.0, \"Fibra\": 0.0}),\n    (\"Banana Prata\", 89, \"1 un (100g)\", {\"Proteína\": 1.1, \"Gordura\": 0.3, \"Carboidrato\": 22.8, \"Fibra\": 2.6}),",
         "detail": "Main",
         "documentation": {}
     },
@@ -575,7 +591,7 @@
         "kind": 6,
         "importPath": "Models",
         "description": "Models",
-        "peekOfCode": "class AlimentoNutriente(Base):\n    __tablename__ = 'alimento_nutriente'\n    id_alimento = Column(Integer, ForeignKey('alimento.id_alimento'), primary_key=True)\n    id_nutriente = Column(Integer, ForeignKey('nutriente.id_nutriente'), primary_key=True)\n    quantidade_por_100un = Column(Integer, nullable=False)\n    alimento = relationship(\"Alimento\", back_populates=\"alimento_nutrientes\")\n    nutriente = relationship(\"Nutriente\", back_populates=\"alimento_nutrientes\")\nclass RefeicaoAlimento(Base):\n    __tablename__ = 'refeicao_alimento'\n    id_refeicao = Column(Integer, ForeignKey('refeicao.id_refeicao'), primary_key=True)",
+        "peekOfCode": "class AlimentoNutriente(Base):\n    __tablename__ = 'alimento_nutriente'\n    id_alimento = Column(Integer, ForeignKey('alimento.id_alimento'), primary_key=True)\n    id_nutriente = Column(Integer, ForeignKey('nutriente.id_nutriente'), primary_key=True)\n    quantidade_por_100un = Column(Numeric(10, 2), nullable=False)\n    alimento = relationship(\"Alimento\", back_populates=\"alimento_nutrientes\")\n    nutriente = relationship(\"Nutriente\", back_populates=\"alimento_nutrientes\")\nclass RefeicaoAlimento(Base):\n    __tablename__ = 'refeicao_alimento'\n    id_refeicao = Column(Integer, ForeignKey('refeicao.id_refeicao'), primary_key=True)",
         "detail": "Models",
         "documentation": {}
     },

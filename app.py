@@ -160,4 +160,4 @@ def get_nutrientes_por_alimento(nome_alimento):
 # ==============================================
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(debug=True, port=5001)
