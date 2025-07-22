@@ -8,343 +8,11 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <link rel="stylesheet" href="../styles/style.css">
+    <link rel="stylesheet" href="../styles/calculadora.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap" rel="stylesheet">
     
-    <style>
-        /* General Styles */
-        body {
-            font-family: 'Poppins', sans-serif;
-            background-color: #f4f4f4; /* Adicionado um fundo suave para a página */
-        }
-
-        /* === HEADER E FOOTER === */
-        .main-header, .main-footer {
-            width: 100%;
-            background-color: #202020;
-            color: #ecf0f1; /* Cor de texto clara */
-            display: flex; /* Para alinhar o conteúdo, se necessário */
-            align-items: center;
-        }
-
-        .main-footer {
-            justify-content: center; /* Centraliza o conteúdo do rodapé */
-        }
-
-        .main-header a, .main-footer a {
-            color: #ffffff; /* Links brancos para contraste */
-            text-decoration: none;
-            margin: 0 10px;
-        }
-        /* ==================================== */
-
-        .content {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            gap: 2.5rem; /* Aumenta o espaço entre as seções */
-            padding-top: 2rem;
-            padding-bottom: 2rem;
-        }
-
-        /* Search Bar Styles */
-        .search-bar {
-            position: relative;
-            width: 90%;
-            margin-top: 1rem;
-            max-width: 800px; /* Define uma largura máxima */
-        }
-
-        .search-icon {
-            position: absolute;
-            left: 20px;
-            top: 50%;
-            transform: translateY(-50%);
-            pointer-events: none;
-            color: #555; 
-        }
-
-        .form-control {
-            background-color: #ffffff;
-            border-radius: 24px;
-            padding-left: 3rem; 
-            border: 1px solid #ddd;
-        }
-
-        /* Food Section Styles */
-        .food-name {
-            display: flex;
-            flex-direction: row;
-            align-items: center;
-            background-color: #ffffff;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-            margin-top: 1rem;
-            width: 100%;
-            justify-content: center;
-            padding: 2rem;
-            text-align: left;
-        }
-
-        .food-name-image {
-            width: 12rem;
-            height: 12rem; 
-            object-fit: cover;
-            border-radius: 50%;
-            margin-right: 2rem;
-            flex-shrink: 0;
-        }
-
-        .food-text {
-            display: flex;
-            flex-direction: column;
-        }
-
-        .food-text p {
-            margin: 0;
-            color: #555;
-        }
-
-        .food-text h1 {
-            font-size: 2rem;
-            font-weight: 700;
-            color: #333;
-        }
-
-        .food-info {
-            display: flex;
-            flex-wrap: wrap; 
-            justify-content: center;
-            align-items: flex-start;
-            width: 100%;
-            padding: 0 1rem;
-            gap: 2rem; 
-        }
-
-        /* Nutrition Card */
-        .nutrition-card {
-            color: white;
-            border-radius: 8px;
-            width: 100%;
-            padding: 0;
-            max-width: 350px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-            overflow: hidden;
-            flex-shrink: 0;
-        }
-
-        .card-top {
-            background-color: #f39c12; /* Laranja mais vibrante */
-            padding: 20px;
-        }
-
-        .calories {
-            font-size: 2.8em;
-            font-weight: bold;
-            margin: 0;
-            line-height: 1;
-        }
-
-        .serving-controls {
-            display: flex;
-            align-items: flex-end;
-            gap: 10px;
-            margin-top: 15px;
-        }
-
-        .input-group {
-            display: flex;
-            flex-direction: column;
-        }
-
-        .input-group label {
-            font-size: 0.8em;
-            margin-bottom: 4px;
-            font-weight: 500;
-        }
-        
-        .input-group input, .input-group select {
-            background: transparent;
-            border: none;
-            border-bottom: 2px solid white;
-            color: white;
-            font-size: 1em;
-            padding-bottom: 5px;
-            -webkit-appearance: none;
-            -moz-appearance: none;
-            appearance: none;
-        }
-
-        .input-group input#quantity {
-            width: 60px;
-        }
-        
-        .input-group select {
-            min-width: 180px;
-            background: url('data:image/svg+xml;utf8,<svg fill="white" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"/></svg>') no-repeat right;
-            background-position-x: calc(100% - 5px);
-        }
-
-        .multiplier {
-            font-size: 1.5em;
-            padding-bottom: 5px;
-        }
-        
-        .card-bottom {
-            display: flex;
-            justify-content: space-around; /* Melhora a distribuição */
-            text-align: center;
-            background-color: white;
-            color: #2b2b2b;
-            padding: 15px;
-        }
-
-        .macro {
-            flex: 1; /* Faz cada macro ocupar o mesmo espaço */
-        }
-
-        .macro .value {
-            font-size: 1.2em;
-            font-weight: bold;
-            margin: 0 0 4px 0;
-        }
-
-        .macro .label {
-            font-size: 0.9em;
-        }
-
-        /* Burn Time Card */
-        .burn-time {
-            padding: 25px;
-            border: none;
-            border-radius: 8px;
-            background-color: #fff;
-            color: black;
-            width: 100%;
-            max-width: 500px;
-            flex-grow: 1;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-        }
-
-        .burn-time h3 {
-            font-weight: 700;
-            margin-bottom: 0.5rem;
-        }
-
-        .burn-time p {
-            color: #555;
-            margin-bottom: 1.5rem;
-        }
-
-        .activities-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 20px 25px; /* Aumenta o espaço horizontal */
-        }
-
-        .activity-item {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
-
-        .activity-icon {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 50px;
-            height: 50px;
-            background-color: #e9ecef;
-            border-radius: 50%;
-            font-size: 24px;
-            color: #495057;
-            flex-shrink: 0;
-        }
-
-        .activity-info {
-            display: flex;
-            flex-direction: column;
-        }
-
-        .activity-name {
-            font-weight: 500;
-        }
-
-        .activity-time {
-            font-size: 0.9em;
-            color: #666;
-        }
-
-        /* Popular Foods Section */
-        .popular-foods-container {
-            width: 100%;
-            max-width: 1200px;
-            padding: 2rem 1rem;
-            color: black;
-        }
-        
-        .popular-foods-container h3 {
-            text-align: center;
-            margin-bottom: 2rem;
-            font-weight: 700;
-        }
-
-        .popular-foods {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 1.5rem;
-            justify-content: center;
-        }
-        
-        .popular-foods .card {
-            border-radius: 12px;
-            border: none;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-            overflow: hidden;
-            width: 15rem;
-            transition: transform 0.2s ease-in-out;
-        }
-        
-        .popular-foods .card:hover {
-            transform: translateY(-5px);
-        }
-
-        .popular-foods .card-img-top {
-            object-fit: cover;
-            height: 10rem;
-        }
-
-        .popular-foods .card-body {
-            background-color: rgb(31, 31, 31);
-            color: #ffffff;
-            text-align: center;
-        }
-        
-        /* === Responsive Adjustments for Mobile === */
-        @media (max-width: 992px) {
-            .food-name {
-                flex-direction: column;
-                text-align: center;
-            }
-            .food-name-image {
-                margin-right: 0;
-                margin-bottom: 1.5rem;
-            }
-        }
-
-        @media (max-width: 768px) {
-            .food-text h1 {
-                font-size: 1.5rem;
-            }
-            .search-bar {
-                max-width: 90%;
-            }
-            .activities-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-    </style>
 </head>
 <body>
     <header class='main-header' data-include="../components/header.html"></header>
@@ -355,7 +23,7 @@
             <div class="search-bar">
                 <i class="bi bi-search search-icon"></i>
                 <input class="form-control" list="datalistOptions" id="exampleDataList" placeholder="Procure por um alimento...">
-                <datalist id="datalistOptions">
+                <datalist id="datalistOptions"> <!-- Aqui é o tipo de código que consulta uma tabela toda e preenche tudo nas options -->
                     <option value="Pizza de Pepperoni">
                     <option value="Hambúrguer">
                     <option value="Maçã">
@@ -369,29 +37,29 @@
             <img class="food-name-image" src="https://www.calorieking.com/food-images/us/d0fbfbe2-db93-42d7-811f-be2a56ec9416.jpg" alt="Pizza de Pepperoni"/>
             <div class="food-text">
                 <p>Quantas calorias tem em:</p>
-                <h1>Domino's Pizza Pepperoni Large Hand Tossed Crust Pizza</h1>
+                <h1 id="h1_alimento">Domino's Pizza Pepperoni Large Hand Tossed Crust Pizza</h1> <!-- Consultar o que foi digitado e atualizar aqui -->
             </div>
         </section>
         
         <section class="food-info">
             <div class="nutrition-card">
                 <div class="card-top">
-                    <h2 class="calories">280 Calories</h2>
+                    <h2 id="h2_calories" class="calories">280 Calories</h2> <!-- Consultar o que foi digitado e atualizar aqui -->
                     <div class="serving-controls">
                         <div class="input-group">
                             <input type="number" id="quantity" value="1" min="1">
-                            <label for="quantity">Quantidade</label>
+                            <label for="quantity">Quantidade</label> 
                         </div>
                         <span class="multiplier">x</span>
                         <div class="input-group">
-                            <select id="measure">
-                                <option>fatia, 1/8 pizza</option>
+                            <select>
+                                <option id="measure">g</option>
                             </select>
                             <label for="measure">Unidade de Medida</label>
                         </div>
                     </div>
                 </div>
-                <div class="card-bottom">
+                <div class="card-bottom"> <!-- Consultar o que foi digitado e atualizar aqui -->
                     <div class="macro">
                         <p class="value">11 g</p>
                         <p class="label">Gordura</p>
@@ -412,8 +80,8 @@
             </div>
 
             <div class="burn-time">
-                <h3>Tempo de Queima de Calorias</h3>
-                <p>Quanto tempo levaria para queimar 280 calorias desta pizza?</p>
+                <h3>Tempo de Queima de Calorias</h3> <!-- Isso aqui é só uma lógica matemática -->
+                <p id="p_calorias">Quanto tempo levaria para queimar 280 calorias?</p>
                 
                 <div class="activities-grid">
                     <div class="activity-item">
@@ -422,7 +90,7 @@
                         </div>
                         <div class="activity-info">
                             <span class="activity-name">Natação</span>
-                            <span class="activity-time">24 minutos</span>
+                            <span id="natação" class="activity-time">9.6 minutos</span>
                         </div>
                     </div>
                     <div class="activity-item">
@@ -431,7 +99,7 @@
                         </div>
                         <div class="activity-info">
                             <span class="activity-name">Corrida</span>
-                            <span class="activity-time">32 minutos</span>
+                            <span id="corrida" class="activity-time">2 minutos</span>
                         </div>
                     </div>
                     <div class="activity-item">
@@ -440,7 +108,7 @@
                         </div>
                         <div class="activity-info">
                             <span class="activity-name">Ciclismo</span>
-                            <span class="activity-time">43 minutos</span>
+                            <span id="ciclismo" class="activity-time">3 minutos</span>
                         </div>
                     </div>
                     <div class="activity-item">
@@ -449,7 +117,7 @@
                         </div>
                         <div class="activity-info">
                             <span class="activity-name">Caminhada</span>
-                            <span class="activity-time">78 minutos</span>
+                            <span id="caminhada" class="activity-time">4 minutos</span>
                         </div>
                     </div>
                 </div>
@@ -457,33 +125,33 @@
         </section>
 
         <section class="popular-foods-container">
-            <h3>Alimentos Populares</h3>
+            <h3>Alimentos Populares</h3> <!-- Lógica de digitar o que foi clicado lá na barra de pesquisa -->
             <div class="popular-foods">
                 <div class="card">
-                    <img src="https://superirmao.loji.com.br/storage/uploads/jTkxxV3HqyHfpFo89PP2xT5r2xyxzzNLZacvqLPs.jpg" class="card-img-top" alt="Coca-Cola">
+                    <img src="https://www.dietabiotres.pt/wp-content/uploads/2017/11/Peito-de-frango-grelhados.jpg" class="card-img-top" alt="Coca-Cola">
                     <div class="card-body">
-                        <p class="card-text">Coca-Cola</p>
+                        <p class="card-text">Frango Grelhado</p>
                     </div>
                 </div>
 
                 <div class="card">
-                    <img src="https://ibassets.com.br/ib.item.image.large/l-600100eac7f84e65ba41fe7385d40e9b.jpeg" class="card-img-top" alt="Big Mac">
+                    <img src="https://assets.tmecosys.com/image/upload/t_web_rdp_recipe_584x480/img/recipe/ras/Assets/7F99AEE8-50AA-4CAA-A340-81E4891F912F/Derivates/3de10392-9a13-48e5-9098-af5149c40c0a.jpg" class="card-img-top" alt="Big Mac">
                     <div class="card-body">
-                        <p class="card-text">Big Mac</p>
+                        <p class="card-text">Arroz Integral</p>
                     </div>
                 </div>
                 
                 <div class="card">
-                    <img src="https://prezunic.vtexassets.com/arquivos/ids/209021/6604425751fbbd7176e102ad.jpg?v=638471519631130000" class="card-img-top" alt="Sorvete Kibon">
+                    <img src="https://vitat.com.br/bkt/busca-de-alimentos/1735-ovo-de-galinha-cozido.jpg" class="card-img-top" alt="Sorvete Kibon">
                     <div class="card-body">
-                        <p class="card-text">Sorvete Kibon</p>
+                        <p class="card-text">Ovo Cozido</p>
                     </div>
                 </div>
                 
                 <div class="card">
-                    <img src="https://prezunic.vtexassets.com/arquivos/ids/176188-800-auto?v=638306627005300000&width=800&height=auto&aspect=true" class="card-img-top" alt="Barra de Chocolate">
+                    <img src="https://cdn.casaeculinaria.com/wp-content/uploads/2023/10/13115444/Salmao-grelhado-1.webp" class="card-img-top" alt="Barra de Chocolate">
                     <div class="card-body">
-                        <p class="card-text">Barra de Chocolate</p>
+                        <p class="card-text">Salmão</p>
                     </div>
                 </div>
             </div>
@@ -494,5 +162,181 @@
 
     <script src="../scripts/include.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        let alimentoAtual = null;
+
+        // Função pra pegar todas as linhas da tabela Alimentos pra por lá na barra de pesquisa
+        function obter_alimentos() {
+            fetch("http://localhost:5000/alimentos")
+            .then(response => response.json())
+            .then(data => {
+                const datalist = document.getElementById("datalistOptions");
+                datalist.innerHTML = ""; // limpa antes de adicionar novos
+
+                data.forEach(alimento => {
+                    const option = document.createElement("option");
+                    option.value = alimento.nome_alimento;
+                    datalist.appendChild(option);
+                });
+            })
+            .catch(error => console.error("Erro ao buscar alimentos:", error));
+        }
+
+        // Ao apertar ENTER na barra de pesquisa, essa função é chamada
+        // Serve pra buscar o alimento pelo nome que foi colocado na barra de pesquisa
+        // E depois Atualizar os conteudos da pagina com base no objeto alimento retornado
+        function buscarAlimento(input) {
+            fetch(`http://localhost:5000/alimentos/nutrientes/${input}`)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Alimento não encontrado.');
+                }
+                return response.json();
+            })
+            .then(data => {
+                alimentoAtual = data;
+
+                const h1_alimento = document.getElementById('h1_alimento');
+                const measure = document.getElementById('measure');
+
+                h1_alimento.innerText = data.nome_alimento;
+                measure.innerText = data.unidade_padrao;
+
+                // Define a quantidade como 1 antes de atualizar
+                document.getElementById('quantity').value = 1;
+
+                // Atualiza tanto as calorias quanto os nutrientes
+                atualizarCalorias();
+            })
+            .catch(error => {
+                console.error("Erro ao buscar alimento:", error);
+                document.getElementById('h1_alimento').innerText = "Alimento não encontrado";
+                document.getElementById('h2_calories').innerText = "0 Calorias";
+                document.querySelector('.card-bottom').innerHTML = ""; // Limpa os nutrientes
+            });
+        }
+
+        function atualizarNutrientes() {
+            const cardBottom = document.querySelector('.card-bottom');
+            cardBottom.innerHTML = ""; // Limpa os nutrientes antigos
+
+            if (alimentoAtual && alimentoAtual.nutrientes) {
+                const quantidade = parseInt(document.getElementById('quantity').value) || 1;
+
+                alimentoAtual.nutrientes.forEach(item => {
+                    // Cria o container do macro
+                    const macroDiv = document.createElement('div');
+                    macroDiv.className = 'macro';
+
+                    // Cria o parágrafo do valor
+                    const valueP = document.createElement('p');
+                    valueP.className = 'value';
+                    const valorCalculado = item.quantidade_por_100un * quantidade;
+                    // Formata com uma casa decimal se não for um inteiro
+                    const valorFormatado = Number.isInteger(valorCalculado) ? valorCalculado : valorCalculado.toFixed(1);
+                    valueP.innerText = `${valorFormatado} ${item.unidade_medida}`;
+
+
+                    // Cria o parágrafo do rótulo
+                    const labelP = document.createElement('p');
+                    labelP.className = 'label';
+                    labelP.innerText = item.nome_nutriente;
+
+                    // Adiciona os parágrafos ao container do macro
+                    macroDiv.appendChild(valueP);
+                    macroDiv.appendChild(labelP);
+
+                    // Adiciona o macro ao card
+                    cardBottom.appendChild(macroDiv);
+                });
+            }
+        }
+
+        function atualizarCalorias() {
+            const quantidade = parseInt(document.getElementById('quantity').value) || 1;
+            const h2_calories = document.getElementById('h2_calories');
+            const p_calorias = document.getElementById('p_calorias');
+
+            const natação = document.getElementById('natação');
+            const corrida = document.getElementById('corrida');
+            const ciclismo = document.getElementById('ciclismo');
+            const caminhada = document.getElementById('caminhada');
+
+            if (alimentoAtual && !isNaN(quantidade)) {
+                const totalCalorias = quantidade * alimentoAtual.calorias;
+
+                // Calorias queimadas por minuto em média
+                const caloriasPorMinuto = {
+                    natacao: 9.6,
+                    corrida: 11.4,
+                    ciclismo: 7.5,
+                    caminhada: 3.9
+                };
+
+                // Tempo necessário = totalCalorias / caloriasPorMinuto
+                const tempoNatacao = (totalCalorias / caloriasPorMinuto.natacao).toFixed(1);
+                const tempoCorrida = (totalCalorias / caloriasPorMinuto.corrida).toFixed(1);
+                const tempoCiclismo = (totalCalorias / caloriasPorMinuto.ciclismo).toFixed(1);
+                const tempoCaminhada = (totalCalorias / caloriasPorMinuto.caminhada).toFixed(1);
+
+                h2_calories.innerText = `${totalCalorias} Calorias`;
+                p_calorias.innerText = `Quanto tempo levaria para queimar ${totalCalorias} calorias?`;
+
+                natação.innerText = `${tempoNatacao} minutos`;
+                corrida.innerText = `${tempoCorrida} minutos`;
+                ciclismo.innerText = `${tempoCiclismo} minutos`;
+                caminhada.innerText = `${tempoCaminhada} minutos`;
+                
+                // Chama a função para atualizar os nutrientes
+                atualizarNutrientes();
+            }
+        }
+
+        // Event Listeners ---------------------------------------------------------------------------------
+
+        // Event Listener para quando o DOM (a página) for carregado
+        document.addEventListener("DOMContentLoaded", function () {
+            // Preenche a lista da barra de pesquisa
+            obter_alimentos();
+
+            // *** NOVO CÓDIGO ADICIONADO AQUI ***
+            // Adiciona a funcionalidade de clique aos cards de alimentos populares
+            const popularFoodCards = document.querySelectorAll('.popular-foods .card');
+            popularFoodCards.forEach(card => {
+                card.addEventListener('click', () => {
+                    // Pega o nome do alimento de dentro do card clicado
+                    const foodName = card.querySelector('.card-text').innerText;
+                    
+                    // Chama a função de busca com esse nome
+                    buscarAlimento(foodName);
+
+                    // Opcional: rola a tela para o topo para ver o resultado
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                });
+            });
+        });
+
+        // Intercepta o envio do formulário (quando pressiona Enter na busca)
+        document.querySelector("form").addEventListener("submit", function (event) {
+            event.preventDefault(); // Impede o reload da página
+            const input = document.getElementById("exampleDataList").value;
+            buscarAlimento(input);
+        });
+
+        // Monitora quando o usuário aumenta ou diminui a quantidade do alimento
+        document.getElementById('quantity').addEventListener('input', atualizarCalorias);
+
+        // Intercepta o envio do formulário (quando pressiona Enter)
+        document.querySelector("form").addEventListener("submit", function (event) {
+            event.preventDefault(); // Impede o reload da página
+            const input = document.getElementById("exampleDataList").value;
+            buscarAlimento(input); // Chama sua função personalizada
+        });
+
+        // Event Listener pra monitorar quando usuario aumenta ou diminui a quantidade do alimento
+        document.getElementById('quantity').addEventListener('input', atualizarCalorias);
+
+    </script>
 </body>
 </html>

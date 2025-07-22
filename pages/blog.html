@@ -13,6 +13,36 @@
 <body>
     <div class='main-header' data-include="../components/header.html"></div>
 
+    <div id="teste">
+
+    </div>
+
     <script src="../scripts/include.js"></script>
+
+    <script>
+
+        // Função pra pegar todas as linhas da tabela Alimentos pra por lá na barra de pesquisa
+        const nomeAlimento = "Feijão Preto"; // Pode ser do input, né~
+
+        fetch(`http://localhost:5000/alimentos/nutrientes/${encodeURIComponent(nomeAlimento)}`)
+        .then(response => {
+            if (!response.ok) throw new Error("Erro ao buscar nutrientes do alimento");
+            return response.json();
+        })
+        .then(data => {
+            console.log("Alimento:", data.nome_alimento);
+            console.log("Nutrientes:");
+
+            data.nutrientes.forEach(nutriente => {
+            console.log(`- ${nutriente.nome_nutriente}: ${nutriente.quantidade_por_100un} ${nutriente.unidade_medida}`);
+            });
+        })
+        .catch(error => {
+            console.error("Deu ruim:", error);
+        });
+        
+
+    </script>
+
 </body>
 </html>
