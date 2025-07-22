@@ -1,21 +1,511 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Receitas</title>
-    <!-- CSS/Fonts -->
-    <link rel="stylesheet" href="../styles/style.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap" rel="stylesheet">
     <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #f8f9fa;
+            color: #333;
+        }
+
+        .container {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        /* Main Content */
+        .main-content {
+            flex: 1;
+            padding: 20px 30px;
+        }
+
+        .header {
+            display: flex;
+            justify-content: between;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+
+        .header-left h1 {
+            font-size: 28px;
+            font-weight: 700;
+            color: #333;
+            margin-bottom: 5px;
+        }
+
+        .header-left p {
+            color: #666;
+            font-size: 14px;
+        }
+
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-left: auto;
+        }
+
+        .search-box {
+            position: relative;
+        }
+
+        .search-input {
+            padding: 10px 40px 10px 16px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            width: 250px;
+            font-size: 14px;
+        }
+
+        .search-input:focus {
+            outline: none;
+            border-color: #28a745;
+        }
+
+        .search-icon {
+            position: absolute;
+            right: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #999;
+        }
+
+        .user-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: #28a745;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 600;
+            font-size: 14px;
+        }
+
+        /* Filters */
+        .filters {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 25px;
+        }
+
+        .filter-btn {
+            padding: 8px 16px;
+            border: 1px solid #ddd;
+            background: white;
+            border-radius: 20px;
+            font-size: 13px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .filter-btn.active {
+            background: #333;
+            color: white;
+            border-color: #333;
+        }
+
+        .filter-btn:hover:not(.active) {
+            border-color: #999;
+        }
+
+        /* Recipe Grid */
+        .recipes-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .recipe-card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s, box-shadow 0.2s;
+            cursor: pointer;
+        }
+
+        .recipe-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .recipe-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .recipe-info {
+            padding: 16px;
+        }
+
+        .recipe-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 8px;
+            line-height: 1.3;
+        }
+
+        .recipe-meta {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            color: #666;
+            font-size: 13px;
+        }
+
+        .recipe-meta span {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        /* Right Sidebar */
+        .right-sidebar {
+            width: 280px;
+            background: white;
+            border-left: 1px solid #e9ecef;
+            padding: 20px;
+        }
+
+        .nutrition-section {
+            margin-bottom: 30px;
+        }
+
+        .section-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 15px;
+        }
+
+        .nutrition-chart {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background: conic-gradient(#dc3545 0deg 120deg,
+                    #ffc107 120deg 180deg,
+                    #28a745 180deg 240deg,
+                    #6f42c1 240deg 360deg);
+            margin: 0 auto 15px;
+            position: relative;
+        }
+
+        .nutrition-chart::before {
+            content: '';
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            right: 20px;
+            bottom: 20px;
+            background: white;
+            border-radius: 50%;
+        }
+
+        .nutrition-list {
+            list-style: none;
+        }
+
+        .nutrition-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 8px;
+            font-size: 13px;
+        }
+
+        .nutrition-color {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            margin-right: 8px;
+        }
+
+        .nutrition-color.protein {
+            background: #dc3545;
+        }
+
+        .nutrition-color.carbs {
+            background: #ffc107;
+        }
+
+        .nutrition-color.fat {
+            background: #28a745;
+        }
+
+        .nutrition-color.fiber {
+            background: #6f42c1;
+        }
+
+        .friends-section .friend-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .friend-avatar {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: #f8f9fa;
+            margin-right: 10px;
+        }
+
+        .friend-name {
+            font-size: 13px;
+            color: #333;
+        }
+
+        .add-recipe-btn {
+            width: 100%;
+            padding: 12px;
+            background: #28a745;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .add-recipe-btn:hover {
+            background: #218838;
+        }
+
+        @media (max-width: 1024px) {
+            .right-sidebar {
+                display: none;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .main-content {
+                padding: 15px;
+            }
+
+            .header {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .search-input {
+                width: 200px;
+            }
+        }
     </style>
 </head>
+
 <body>
-    <div class='main-header' data-include="../components/header.html"></div>
+    <div class="container">
+        <main class="main-content">
+            <header class="header">
+                <div class="header-left">
+                    <h1>Receitas fitness</h1>
+                    <p>8 resultados</p>
+                </div>
+                <div class="header-right">
+                    <div class="search-box">
+                        <input type="text" class="search-input" placeholder="Procure uma receita...">
+                        <span class="search-icon">🔍</span>
+                    </div>
+                    <div class="user-avatar">HF</div>
+                </div>
+            </header>
+
+            <div class="filters">
+                <button class="filter-btn active">Todas</button>
+                <button class="filter-btn">Café da manhã</button>
+                <button class="filter-btn">Almoço</button>
+                <button class="filter-btn">Jantar</button>
+                <button class="filter-btn">Lanche</button>
+                <button class="filter-btn">Sobremesa</button>
+            </div>
+
+            <div class="recipes-grid" id="recipesGrid">
+            </div>
+        </main>
+
+        <aside class="right-sidebar">
+            <div class="nutrition-section">
+                <h3 class="section-title">Informações gerais</h3>
+                <div class="nutrition-chart"></div>
+                <ul class="nutrition-list">
+                    <li class="nutrition-item">
+                        <span class="nutrition-color protein"></span>
+                        Proteínas 25%
+                    </li>
+                    <li class="nutrition-item">
+                        <span class="nutrition-color carbs"></span>
+                        Carboidratos 35%
+                    </li>
+                    <li class="nutrition-item">
+                        <span class="nutrition-color fat"></span>
+                        Gordura 30%
+                    </li>
+                    <li class="nutrition-item">
+                        <span class="nutrition-color fiber"></span>
+                        Fibra 10%
+                    </li>
+                </ul>
+            </div>
+
+            <div class="friends-section">
+                <h3 class="section-title">Chefes das Receitas</h3>
+                <div class="friend-item">
+                    <div class="friend-avatar">
+                        <img src="https://media.licdn.com/dms/image/v2/D4D03AQFLduNQrHM8yw/profile-displayphoto-shrink_800_800/B4DZda8w7LGYAc-/0/1749577571385?e=1756339200&v=beta&t=5GGEGMJ6xAdm26BrQrxvuJ-wwDRUzSALyweCIUVue-0" alt="Avatar" class="friend-avatar">
+                    </div>
+                    <span class="friend-name">Marcelle de Paula</span>
+                </div>
+                <div class="friend-item">
+                    <div class="friend-avatar">
+                        <img src="https://media.licdn.com/dms/image/v2/D4E03AQFfIraQMY-aMg/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1731461959752?e=1756339200&v=beta&t=2OfflExJoVKrOWgLInPQ-79bH9ZX4oJTbYeqqGFcF8I" alt="Avatar" class="friend-avatar">
+                    </div>
+                    <span class="friend-name">Helmer Barcelos</span>
+                </div>
+                <div class="friend-item">
+                    <div class="friend-avatar">
+                        <img src="https://media.licdn.com/dms/image/v2/D4D03AQHX2MYjafOawA/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1725760640329?e=1756339200&v=beta&t=Qr3MFmpJ3m9_6-6xEez3eSzhp4vJpbXuuOFfuO729bU" alt="Avatar" class="friend-avatar">
+                    </div>
+                    <span class="friend-name">Pedro Vieira</span>
+                </div>
+            </div>
+
+            <button class="add-recipe-btn">+ Publicar nova receita </button>
+        </aside>
+    </div>
+
+    <script>
+        const recipes = [
+            {
+                title: "Frango Grelhado com Legumes",
+                time: "30 min",
+                servings: "4",
+                difficulty: "Fácil",
+                image: "https://cdn.awsli.com.br/600x700/2764/2764662/produto/299662088/frango-com-legumes-psyw4m92b7.jpeg"
+            },
+            {
+                title: "Salada Fresca da Horta",
+                time: "15 min",
+                servings: "2",
+                difficulty: "Fácil",
+                image: "https://s2-casaejardim.glbimg.com/POI1mMRsyGmxtWQdCpvLPFFyMWU=/0x0:1400x787/888x0/smart/filters:strip_icc()/i.s3.glbimg.com/v1/AUTH_a0b7e59562ef42049f4e191fe476fe7d/internal_photos/bs/2023/Y/j/x0EWg7SyWzoSsp05Itrg/receita-macarrao-espaguete-arrabbiata-pimenta-renata-selmi.jpg"
+            },
+            {
+                title: "Massa Picante à Arrabbiata",
+                time: "25 min",
+                servings: "3",
+                difficulty: "Médio",
+                image: "https://receitasdeencantar.com.br/wp-content/uploads/2023/09/penne-allArrabbiata-1200.jpg"
+            },
+            {
+                title: "Cookies com Gotas de Chocolate Sem Glúten",
+                time: "45 min",
+                servings: "12",
+                difficulty: "Fácil",
+                image: "https://i.panelinha.com.br/i1/bk-3044-blog-ayu2251.webp"
+            },
+            {
+                title: "Carne com Legumes Salteada",
+                time: "20 min",
+                servings: "4",
+                difficulty: "Médio",
+                image: "https://sabores-new.s3.amazonaws.com/public/2024/11/carne-salteada-com-legumes-e-sodio-reduzido.jpg"
+            },
+            {
+                title: "Salmão com Limão",
+                time: "35 min",
+                servings: "2",
+                difficulty: "Médio",
+                image: "https://www.receitasdepeixe.com.br/wp-content/uploads/2024/06/salmao-grelhado-molho-limao-siciliano-nova-paixao-cozinha04.jpg"
+            },
+            {
+                title: "Risoto de Cogumelos",
+                time: "40 min",
+                servings: "3",
+                difficulty: "Difícil",
+                image: "https://s2-receitas.glbimg.com/APk8pOrM29fQle4OjOHifg9mUHg=/0x0:1080x608/924x0/smart/filters:strip_icc()/i.s3.glbimg.com/v1/AUTH_e84042ef78cb4708aeebdf1c68c6cbd6/internal_photos/bs/2022/2/7/7NkGZzQpWTB3ryM8kEFQ/capa-materia-gshow-2022-01-29t135328.257.png"
+            },
+            {
+                title: "Sopa de Abóbora Cabotian",
+                time: "50 min",
+                servings: "6",
+                difficulty: "Fácil",
+                image: "https://i.panelinha.com.br/i1/bk-2040-sopa-de-abobora.webp"
+            }
+        ];
 
 
-    <script src="../scripts/include.js"></script>
+        function renderRecipes(recipesToRender = recipes) {
+            const grid = document.getElementById('recipesGrid');
+            grid.innerHTML = '';
+
+            recipesToRender.forEach(recipe => {
+                const card = document.createElement('div');
+                card.className = 'recipe-card';
+                card.innerHTML = `
+                    <img src="${recipe.image}" alt="${recipe.title}" class="recipe-image">
+                    <div class="recipe-info">
+                        <h3 class="recipe-title">${recipe.title}</h3>
+                        <div class="recipe-meta">
+                            <span>⏱️ ${recipe.time}</span>
+                            <span>👥 ${recipe.servings}</span>
+                            <span>📊 ${recipe.difficulty}</span>
+                        </div>
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+        }
+
+        renderRecipes();
+
+        const filterBtns = document.querySelectorAll('.filter-btn');
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                filterBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                renderRecipes();
+            });
+        });
+
+        const searchInput = document.querySelector('.search-input');
+        searchInput.addEventListener('input', (e) => {
+            const query = e.target.value.toLowerCase();
+            const filtered = recipes.filter(recipe =>
+                recipe.title.toLowerCase().includes(query)
+            );
+            renderRecipes(filtered);
+
+            document.querySelector('.header-left p').textContent = `${filtered.length} results`;
+        });
+
+        document.addEventListener('click', (e) => {
+            if (e.target.closest('.recipe-card')) {
+                const card = e.target.closest('.recipe-card');
+                const title = card.querySelector('.recipe-title').textContent;
+                alert(`Carregando receita: ${title}`);
+            }
+        });
+
+        document.querySelector('.add-recipe-btn').addEventListener('click', () => {
+            alert('Em breve, você poderá publicar uma nova receita!');
+        });
+    </script>
 </body>
+
 </html>
