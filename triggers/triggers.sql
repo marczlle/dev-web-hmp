@@ -57,7 +57,7 @@ BEGIN
     SELECT CASE
         WHEN NEW.quantidade_por_100un <= 0 THEN
             RAISE(ABORT, 'A quantidade do nutriente deve ser maior que zero.')
-    END;
+    END;                
 END;
 
 

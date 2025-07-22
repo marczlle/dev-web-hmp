@@ -1,5 +1,166 @@
 [
     {
+        "label": "Flask",
+        "importPath": "flask",
+        "description": "flask",
+        "isExtraImport": true,
+        "detail": "flask",
+        "documentation": {}
+    },
+    {
+        "label": "jsonify",
+        "importPath": "flask",
+        "description": "flask",
+        "isExtraImport": true,
+        "detail": "flask",
+        "documentation": {}
+    },
+    {
+        "label": "request",
+        "importPath": "flask",
+        "description": "flask",
+        "isExtraImport": true,
+        "detail": "flask",
+        "documentation": {}
+    },
+    {
+        "label": "CORS",
+        "importPath": "flask_cors",
+        "description": "flask_cors",
+        "isExtraImport": true,
+        "detail": "flask_cors",
+        "documentation": {}
+    },
+    {
+        "label": "DAO",
+        "importPath": "DAO",
+        "description": "DAO",
+        "isExtraImport": true,
+        "detail": "DAO",
+        "documentation": {}
+    },
+    {
+        "label": "Models",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "Models",
+        "description": "Models",
+        "detail": "Models",
+        "documentation": {}
+    },
+    {
+        "label": "Alimento",
+        "importPath": "Models",
+        "description": "Models",
+        "isExtraImport": true,
+        "detail": "Models",
+        "documentation": {}
+    },
+    {
+        "label": "Nutriente",
+        "importPath": "Models",
+        "description": "Models",
+        "isExtraImport": true,
+        "detail": "Models",
+        "documentation": {}
+    },
+    {
+        "label": "AlimentoNutriente",
+        "importPath": "Models",
+        "description": "Models",
+        "isExtraImport": true,
+        "detail": "Models",
+        "documentation": {}
+    },
+    {
+        "label": "Alimento",
+        "importPath": "Models",
+        "description": "Models",
+        "isExtraImport": true,
+        "detail": "Models",
+        "documentation": {}
+    },
+    {
+        "label": "Nutriente",
+        "importPath": "Models",
+        "description": "Models",
+        "isExtraImport": true,
+        "detail": "Models",
+        "documentation": {}
+    },
+    {
+        "label": "AlimentoNutriente",
+        "importPath": "Models",
+        "description": "Models",
+        "isExtraImport": true,
+        "detail": "Models",
+        "documentation": {}
+    },
+    {
+        "label": "Categoria_Alimento",
+        "importPath": "Models",
+        "description": "Models",
+        "isExtraImport": true,
+        "detail": "Models",
+        "documentation": {}
+    },
+    {
+        "label": "get_session",
+        "importPath": "DB",
+        "description": "DB",
+        "isExtraImport": true,
+        "detail": "DB",
+        "documentation": {}
+    },
+    {
+        "label": "get_session",
+        "importPath": "DB",
+        "description": "DB",
+        "isExtraImport": true,
+        "detail": "DB",
+        "documentation": {}
+    },
+    {
+        "label": "Base",
+        "importPath": "DB",
+        "description": "DB",
+        "isExtraImport": true,
+        "detail": "DB",
+        "documentation": {}
+    },
+    {
+        "label": "Base",
+        "importPath": "DB",
+        "description": "DB",
+        "isExtraImport": true,
+        "detail": "DB",
+        "documentation": {}
+    },
+    {
+        "label": "Engine",
+        "importPath": "DB",
+        "description": "DB",
+        "isExtraImport": true,
+        "detail": "DB",
+        "documentation": {}
+    },
+    {
+        "label": "Base",
+        "importPath": "DB",
+        "description": "DB",
+        "isExtraImport": true,
+        "detail": "DB",
+        "documentation": {}
+    },
+    {
+        "label": "Base",
+        "importPath": "DB",
+        "description": "DB",
+        "isExtraImport": true,
+        "detail": "DB",
+        "documentation": {}
+    },
+    {
         "label": "typing",
         "kind": 6,
         "isExtraImport": true,
@@ -73,7 +234,7 @@
         "documentation": {}
     },
     {
-        "label": "relationship",
+        "label": "sessionmaker",
         "importPath": "sqlalchemy.orm",
         "description": "sqlalchemy.orm",
         "isExtraImport": true,
@@ -81,52 +242,11 @@
         "documentation": {}
     },
     {
-        "label": "DB",
-        "kind": 6,
+        "label": "relationship",
+        "importPath": "sqlalchemy.orm",
+        "description": "sqlalchemy.orm",
         "isExtraImport": true,
-        "importPath": "DB",
-        "description": "DB",
-        "detail": "DB",
-        "documentation": {}
-    },
-    {
-        "label": "get_session",
-        "importPath": "DB",
-        "description": "DB",
-        "isExtraImport": true,
-        "detail": "DB",
-        "documentation": {}
-    },
-    {
-        "label": "Base",
-        "importPath": "DB",
-        "description": "DB",
-        "isExtraImport": true,
-        "detail": "DB",
-        "documentation": {}
-    },
-    {
-        "label": "Engine",
-        "importPath": "DB",
-        "description": "DB",
-        "isExtraImport": true,
-        "detail": "DB",
-        "documentation": {}
-    },
-    {
-        "label": "Base",
-        "importPath": "DB",
-        "description": "DB",
-        "isExtraImport": true,
-        "detail": "DB",
-        "documentation": {}
-    },
-    {
-        "label": "Base",
-        "importPath": "DB",
-        "description": "DB",
-        "isExtraImport": true,
-        "detail": "DB",
+        "detail": "sqlalchemy.orm",
         "documentation": {}
     },
     {
@@ -147,6 +267,14 @@
     },
     {
         "label": "URL",
+        "importPath": "sqlalchemy",
+        "description": "sqlalchemy",
+        "isExtraImport": true,
+        "detail": "sqlalchemy",
+        "documentation": {}
+    },
+    {
+        "label": "create_engine",
         "importPath": "sqlalchemy",
         "description": "sqlalchemy",
         "isExtraImport": true,
@@ -218,30 +346,93 @@
         "documentation": {}
     },
     {
-        "label": "DAO",
-        "kind": 6,
-        "isExtraImport": true,
-        "importPath": "DAO",
-        "description": "DAO",
-        "detail": "DAO",
+        "label": "index",
+        "kind": 2,
+        "importPath": "app",
+        "description": "app",
+        "peekOfCode": "def index():\n    return \"API do NutriApp funcionando! 🍎\"\n# Buscar alimentos por categoria (GET)\n@app.route(\"/alimentos/categoria/<categoria>\", methods=[\"GET\"])\ndef get_alimentos_por_categoria(categoria):\n    try:\n        resultados = dao.buscar_por_categoria(categoria)\n        alimentos = [\n            {\n                \"id_alimento\": row[0],",
+        "detail": "app",
         "documentation": {}
     },
     {
-        "label": "Models",
-        "kind": 6,
-        "isExtraImport": true,
-        "importPath": "Models",
-        "description": "Models",
-        "detail": "Models",
+        "label": "get_alimentos_por_categoria",
+        "kind": 2,
+        "importPath": "app",
+        "description": "app",
+        "peekOfCode": "def get_alimentos_por_categoria(categoria):\n    try:\n        resultados = dao.buscar_por_categoria(categoria)\n        alimentos = [\n            {\n                \"id_alimento\": row[0],\n                \"nome_alimento\": row[1],\n                \"unidade_padrao\": row[2],\n                \"calorias\": row[3],\n            }",
+        "detail": "app",
         "documentation": {}
     },
     {
-        "label": "setup_triggers",
-        "kind": 6,
-        "isExtraImport": true,
-        "importPath": "setup_triggers",
-        "description": "setup_triggers",
-        "detail": "setup_triggers",
+        "label": "adicionar_alimento",
+        "kind": 2,
+        "importPath": "app",
+        "description": "app",
+        "peekOfCode": "def adicionar_alimento():\n    dados = request.get_json()\n    novo_alimento = Alimento(\n        nome_alimento=dados[\"nome_alimento\"],\n        unidade_padrao=dados[\"unidade_padrao\"],\n        calorias=dados[\"calorias\"],\n        id_categoria=dados[\"id_categoria\"]\n    )\n    try:\n        resultado = dao.adicionar_entidade(novo_alimento)",
+        "detail": "app",
+        "documentation": {}
+    },
+    {
+        "label": "get_alimento",
+        "kind": 2,
+        "importPath": "app",
+        "description": "app",
+        "peekOfCode": "def get_alimento(id_alimento):\n    try:\n        alimento = dao.obter_por_id(Alimento, id_alimento)\n        return jsonify({\n            \"id_alimento\": alimento.id_alimento,\n            \"nome_alimento\": alimento.nome_alimento,\n            \"unidade_padrao\": alimento.unidade_padrao,\n            \"calorias\": alimento.calorias,\n            \"id_categoria\": alimento.id_categoria\n        })",
+        "detail": "app",
+        "documentation": {}
+    },
+    {
+        "label": "deletar_alimento",
+        "kind": 2,
+        "importPath": "app",
+        "description": "app",
+        "peekOfCode": "def deletar_alimento(id_alimento):\n    try:\n        sucesso = dao.remover_por_id(Alimento, id_alimento)\n        if sucesso:\n            return jsonify({\"mensagem\": \"Alimento deletado com sucesso!\"})\n        return jsonify({\"mensagem\": \"Alimento não encontrado.\"}), 404\n    except Exception as e:\n        return jsonify({\"erro\": str(e)}), 500\n# Obter todos os alimentos da tabela    \n@app.route(\"/alimentos\", methods=[\"GET\"])",
+        "detail": "app",
+        "documentation": {}
+    },
+    {
+        "label": "get_todos_alimentos",
+        "kind": 2,
+        "importPath": "app",
+        "description": "app",
+        "peekOfCode": "def get_todos_alimentos():\n    try:\n        with get_session() as session:\n            alimentos = session.query(Alimento).all()\n            lista = [\n                {\n                    \"id_alimento\": a.id_alimento,\n                    \"nome_alimento\": a.nome_alimento,\n                    \"unidade_padrao\": a.unidade_padrao,\n                    \"calorias\": a.calorias,",
+        "detail": "app",
+        "documentation": {}
+    },
+    {
+        "label": "get_alimento_por_nome",
+        "kind": 2,
+        "importPath": "app",
+        "description": "app",
+        "peekOfCode": "def get_alimento_por_nome(nome_alimento):\n    try:\n        with get_session() as session:\n            alimento = session.query(Alimento).filter(Alimento.nome_alimento == nome_alimento).first()\n            if alimento:\n                return jsonify({\n                    \"id_alimento\": alimento.id_alimento,\n                    \"nome_alimento\": alimento.nome_alimento,\n                    \"unidade_padrao\": alimento.unidade_padrao,\n                    \"calorias\": alimento.calorias,",
+        "detail": "app",
+        "documentation": {}
+    },
+    {
+        "label": "get_nutrientes_por_alimento",
+        "kind": 2,
+        "importPath": "app",
+        "description": "app",
+        "peekOfCode": "def get_nutrientes_por_alimento(nome_alimento):\n    try:\n        with get_session() as session:\n            # 1. Buscar alimento pelo nome\n            alimento = session.query(Alimento).filter(Alimento.nome_alimento == nome_alimento).first()\n            if not alimento:\n                return jsonify({\"erro\": \"Alimento não encontrado.\"}), 404\n            # 2. Buscar os nutrientes relacionados ao alimento\n            nutrientes = (\n                session.query(AlimentoNutriente, Nutriente)",
+        "detail": "app",
+        "documentation": {}
+    },
+    {
+        "label": "app",
+        "kind": 5,
+        "importPath": "app",
+        "description": "app",
+        "peekOfCode": "app = Flask(__name__)\nCORS(app)  # Libera o acesso ao front-end\ndao = DAO()\n# =================== Rotas =====================\n@app.route(\"/\")\ndef index():\n    return \"API do NutriApp funcionando! 🍎\"\n# Buscar alimentos por categoria (GET)\n@app.route(\"/alimentos/categoria/<categoria>\", methods=[\"GET\"])\ndef get_alimentos_por_categoria(categoria):",
+        "detail": "app",
+        "documentation": {}
+    },
+    {
+        "label": "dao",
+        "kind": 5,
+        "importPath": "app",
+        "description": "app",
+        "peekOfCode": "dao = DAO()\n# =================== Rotas =====================\n@app.route(\"/\")\ndef index():\n    return \"API do NutriApp funcionando! 🍎\"\n# Buscar alimentos por categoria (GET)\n@app.route(\"/alimentos/categoria/<categoria>\", methods=[\"GET\"])\ndef get_alimentos_por_categoria(categoria):\n    try:\n        resultados = dao.buscar_por_categoria(categoria)",
+        "detail": "app",
         "documentation": {}
     },
     {
@@ -296,6 +487,60 @@
         "description": "DB",
         "peekOfCode": "Session = sessionmaker(bind=Engine, autoflush=False, autocommit=False)\n@contextmanager\ndef get_session() -> typing.Generator[SQLAlchemySession, None, None]:\n    db: SQLAlchemySession = Session()\n    try:\n        yield db\n    except Exception:\n        db.rollback()\n        raise\n    finally:",
         "detail": "DB",
+        "documentation": {}
+    },
+    {
+        "label": "engine",
+        "kind": 5,
+        "importPath": "Main",
+        "description": "Main",
+        "peekOfCode": "engine = create_engine('sqlite:///data.db')\nBase.metadata.create_all(engine)\nSession = sessionmaker(bind=engine)\nsession = Session()\n# Categoria genérica\ncategoria = Categoria_Alimento(nome_categoria=\"Comida\", descricao=\"Alimentos diversos\")\nsession.add(categoria)\nsession.commit()\n# Nutrientes\nnutrientes = {",
+        "detail": "Main",
+        "documentation": {}
+    },
+    {
+        "label": "Session",
+        "kind": 5,
+        "importPath": "Main",
+        "description": "Main",
+        "peekOfCode": "Session = sessionmaker(bind=engine)\nsession = Session()\n# Categoria genérica\ncategoria = Categoria_Alimento(nome_categoria=\"Comida\", descricao=\"Alimentos diversos\")\nsession.add(categoria)\nsession.commit()\n# Nutrientes\nnutrientes = {\n    \"Gordura\": Nutriente(nome_nutriente=\"Gordura\", unidade_medida=\"g\"),\n    \"Fibra\": Nutriente(nome_nutriente=\"Fibra\", unidade_medida=\"g\"),",
+        "detail": "Main",
+        "documentation": {}
+    },
+    {
+        "label": "session",
+        "kind": 5,
+        "importPath": "Main",
+        "description": "Main",
+        "peekOfCode": "session = Session()\n# Categoria genérica\ncategoria = Categoria_Alimento(nome_categoria=\"Comida\", descricao=\"Alimentos diversos\")\nsession.add(categoria)\nsession.commit()\n# Nutrientes\nnutrientes = {\n    \"Gordura\": Nutriente(nome_nutriente=\"Gordura\", unidade_medida=\"g\"),\n    \"Fibra\": Nutriente(nome_nutriente=\"Fibra\", unidade_medida=\"g\"),\n    \"Proteína\": Nutriente(nome_nutriente=\"Proteína\", unidade_medida=\"g\"),",
+        "detail": "Main",
+        "documentation": {}
+    },
+    {
+        "label": "categoria",
+        "kind": 5,
+        "importPath": "Main",
+        "description": "Main",
+        "peekOfCode": "categoria = Categoria_Alimento(nome_categoria=\"Comida\", descricao=\"Alimentos diversos\")\nsession.add(categoria)\nsession.commit()\n# Nutrientes\nnutrientes = {\n    \"Gordura\": Nutriente(nome_nutriente=\"Gordura\", unidade_medida=\"g\"),\n    \"Fibra\": Nutriente(nome_nutriente=\"Fibra\", unidade_medida=\"g\"),\n    \"Proteína\": Nutriente(nome_nutriente=\"Proteína\", unidade_medida=\"g\"),\n    \"Carboidrato\": Nutriente(nome_nutriente=\"Carboidrato\", unidade_medida=\"g\"),\n}",
+        "detail": "Main",
+        "documentation": {}
+    },
+    {
+        "label": "nutrientes",
+        "kind": 5,
+        "importPath": "Main",
+        "description": "Main",
+        "peekOfCode": "nutrientes = {\n    \"Gordura\": Nutriente(nome_nutriente=\"Gordura\", unidade_medida=\"g\"),\n    \"Fibra\": Nutriente(nome_nutriente=\"Fibra\", unidade_medida=\"g\"),\n    \"Proteína\": Nutriente(nome_nutriente=\"Proteína\", unidade_medida=\"g\"),\n    \"Carboidrato\": Nutriente(nome_nutriente=\"Carboidrato\", unidade_medida=\"g\"),\n}\nsession.add_all(nutrientes.values())\nsession.commit()\n# Alimentos com unidades realistas e nutrientes por porção\nalimentos_data = [",
+        "detail": "Main",
+        "documentation": {}
+    },
+    {
+        "label": "alimentos_data",
+        "kind": 5,
+        "importPath": "Main",
+        "description": "Main",
+        "peekOfCode": "alimentos_data = [\n    (\"Frango Grelhado\", 165, \"100g\", {\"Proteína\": 31, \"Gordura\": 3.6, \"Carboidrato\": 0, \"Fibra\": 0}),\n    (\"Arroz Integral\", 111, \"1 xícara\", {\"Proteína\": 2.6, \"Gordura\": 0.9, \"Carboidrato\": 23, \"Fibra\": 1.8}),\n    (\"Feijão Preto\", 132, \"1 concha\", {\"Proteína\": 8.9, \"Gordura\": 0.5, \"Carboidrato\": 23.7, \"Fibra\": 8.7}),\n    (\"Maçã\", 52, \"1 un\", {\"Proteína\": 0.3, \"Gordura\": 0.2, \"Carboidrato\": 14, \"Fibra\": 2.4}),\n    (\"Ovo Cozido\", 78, \"1 un\", {\"Proteína\": 6.3, \"Gordura\": 5.3, \"Carboidrato\": 0.6, \"Fibra\": 0}),\n    (\"Pão Integral\", 69, \"1 fatia\", {\"Proteína\": 3.6, \"Gordura\": 1.1, \"Carboidrato\": 11.6, \"Fibra\": 1.9}),\n    (\"Iogurte Natural\", 61, \"1 copo (100ml)\", {\"Proteína\": 3.5, \"Gordura\": 3.3, \"Carboidrato\": 4.7, \"Fibra\": 0}),\n    (\"Salmão\", 208, \"100g\", {\"Proteína\": 20, \"Gordura\": 13, \"Carboidrato\": 0, \"Fibra\": 0}),\n    (\"Banana\", 89, \"1 un\", {\"Proteína\": 1.1, \"Gordura\": 0.3, \"Carboidrato\": 23, \"Fibra\": 2.6}),",
+        "detail": "Main",
         "documentation": {}
     },
     {
