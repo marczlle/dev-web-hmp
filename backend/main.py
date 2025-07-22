@@ -33,6 +33,8 @@ app.mount("/assets", StaticFiles(directory=assets_dir), name="assets")
 # Montar páginas como estáticas
 app.mount("/static", StaticFiles(directory=pages_dir, html=True), name="static")
 
+print(f"USUARIO={USUARIO}, SENHA={SENHA}")
+
 # Função para verificar se o usuário está autenticado
 def verificar_autenticacao(request: Request):
     session = request.cookies.get("session")
@@ -49,38 +51,49 @@ def root():
     return RedirectResponse("/static/index.html")
 
 # Endpoint de login - processa as credenciais
+from fastapi.responses import JSONResponse
+
 @app.post("/login")
-async def login(request: Request, response: Response):
+async def login(request: Request):
     try:
         data = await request.json()
-        usuario = data.get("usuario", "").strip()
-        password = data.get("password", "").strip()
-        
-        print(f"Tentativa de login -> usuario: '{usuario}', senha: '{password}'")
-        print(f"Credenciais esperadas -> usuario: '{USUARIO}', senha: '{SENHA}'")
-        
-        # Verifica se as credenciais conferem com o .env
+        print("Recebido do frontend:", data)
+        usuario = data.get("usuario", "")
+        password = data.get("password", "")
+        print(f"usuario: {usuario}, password: {password}")
+        print(f"USUARIO esperado: {USUARIO}, SENHA esperada: {SENHA}")
+
         if usuario != USUARIO:
             print("Usuário incorreto")
-            raise HTTPException(status_code=401, detail="Usuário incorreto")
+            return JSONResponse(
+                status_code=401,
+                content={"success": False, "message": "Usuário incorreto"}
+            )
 
         if password != SENHA:
             print("Senha incorreta")
-            raise HTTPException(status_code=401, detail="Senha incorreta")
+            return JSONResponse(
+                status_code=401,
+                content={"success": False, "message": "Senha incorreta"}
+            )
 
-        # Login bem-sucedido - define cookie de sessão
+        response = JSONResponse(
+            content={
+                "success": True,
+                "message": "Login realizado com sucesso",
+                "redirect": "/catalogo"
+            }
+        )
         response.set_cookie(key="session", value="autorizado", httponly=True, secure=False, samesite="lax")
         print("Login realizado com sucesso")
-        
-        return {
-            "success": True, 
-            "message": "Login realizado com sucesso",
-            "redirect": "/catalogo"
-        }
-        
+        return response
+
     except Exception as e:
         print(f"Erro no login: {str(e)}")
-        raise HTTPException(status_code=400, detail="Erro no processamento do login")
+        return JSONResponse(
+            status_code=400,
+            content={"success": False, "message": f"Erro no processamento do login: {str(e)}"}
+        )
 
 # Rota protegida para o catálogo
 @app.get("/catalogo")
