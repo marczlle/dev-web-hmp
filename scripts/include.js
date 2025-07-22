@@ -9,7 +9,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       el.innerHTML = html;
       el.removeAttribute('data-include');
 
-      // ⚠️ Reexecuta os scripts internos do HTML incluído
+      // Reexecuta os scripts internos do HTML incluído
       const scripts = el.querySelectorAll("script");
       for (const oldScript of scripts) {
         const newScript = document.createElement("script");
@@ -30,6 +30,6 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   await processIncludes();
 
-  // 🔔 Emite evento avisando que todos includes terminaram
+  // Emite evento avisando que todos includes terminaram
   document.dispatchEvent(new Event("includesLoaded"));
 });

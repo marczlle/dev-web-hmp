@@ -1,42 +1,98 @@
-async function validarLogin(event) {
+
+async function realizarLogin(event) {
     event.preventDefault();
 
-    const usuario = document.getElementById("usuario-login").value;
-    const senha = document.getElementById("senha-login").value;
+    // Pega os valores dos campos de login
+    const usuario = document.getElementById('usuario').value.trim();
+    const password = document.getElementById('password').value.trim();
 
-    document.getElementById("error-usuario-login").textContent = "";
-    document.getElementById("error-senha-login").textContent = "";
+    if (!usuario || !password) {
+        alert('Por favor, preencha todos os campos');
+        return;
+    }
 
     try {
-        const res = await fetch("/login", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
+        console.log('Enviando dados de login...');
+
+        const response = await fetch('/login', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
             body: JSON.stringify({
                 usuario: usuario,
-                password: senha
+                password: password
             })
         });
 
-        if (res.ok) {
-            window.location.href = "/catálogo.html";
+        const data = await response.json();
+
+        if (response.ok && data.success) {
+            console.log('Login bem-sucedido');
+            alert('Login realizado com sucesso!');
+
+            // Redireciona para o catálogo
+            window.location.href = '/catalogo';
         } else {
-            const error = await res.json();
-            if (error.detail === "Usuário incorreto") {
-                document.getElementById("error-usuario-login").textContent = "Usuário incorreto";
-            } else if (error.detail === "Senha incorreta") {
-                document.getElementById("error-senha-login").textContent = "Senha incorreta";
-            } else {
-                alert("Erro desconhecido.");
-            }
+            console.error('Erro no login:', data.detail);
+            alert(`Erro: ${data.detail}`);
         }
-    } catch (e) {
-        alert("Erro ao conectar com o servidor.");
+
+    } catch (error) {
+        console.error('Erro na requisição:', error);
+        alert('Erro de conexão. Tente novamente.');
     }
 }
 
-const form = document.getElementById("form-login");
-if (form) {
-    form.addEventListener("submit", validarLogin);
-} else {
-    console.error("Formulário #form-login não encontrado!");
+// Função para verificar se está logado (opcional)
+async function verificarAutenticacao() {
+    try {
+        const response = await fetch('/verify-auth');
+        const data = await response.json();
+
+        if (!data.authenticated && window.location.pathname === '/catalogo') {
+            window.location.href = '/';
+        }
+
+        return data.authenticated;
+    } catch (error) {
+        console.error('Erro ao verificar autenticação:', error);
+        return false;
+    }
 }
+
+// Função para logout
+async function realizarLogout() {
+    try {
+        const response = await fetch('/logout', {
+            method: 'POST'
+        });
+
+        if (response.ok) {
+            alert('Logout realizado com sucesso');
+            window.location.href = '/';
+        }
+    } catch (error) {
+        console.error('Erro no logout:', error);
+    }
+}
+
+// Adiciona event listener quando a página carregar
+document.addEventListener('DOMContentLoaded', function () {
+    // Para o formulário de login
+    const loginForm = document.getElementById('loginForm');
+    if (loginForm) {
+        loginForm.addEventListener('submit', realizarLogin);
+    }
+
+    // Para botão de logout (se existir)
+    const logoutBtn = document.getElementById('logoutBtn');
+    if (logoutBtn) {
+        logoutBtn.addEventListener('click', realizarLogout);
+    }
+
+    // Verifica autenticação em páginas protegidas
+    if (window.location.pathname === '/catalogo') {
+        verificarAutenticacao();
+    }
+});
